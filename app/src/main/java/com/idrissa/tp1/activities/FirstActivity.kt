@@ -3,6 +3,7 @@ package com.idrissa.tp1.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,8 +29,8 @@ class FirstActivity : AppCompatActivity() {
 
     private var search = ""
         set(value) {
-            filterListe()
             field = value
+            filterListe()
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,14 +40,14 @@ class FirstActivity : AppCompatActivity() {
 
         loadData()
         adapater =  PersonAdapater(this@FirstActivity,applicationContext,filteredContactList) {
-            listeDeContact.remove(it)
             filterListe()
+            listeDeContact.remove(it)
+
         }
         liste_de_contact.adapter = adapater
 
         barre_de_recherche.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-            val listContactFound  = ArrayList<Person>()
             override fun onQueryTextSubmit(query: String?): Boolean {
                 search = query ?: ""
                 return false
@@ -73,12 +74,27 @@ class FirstActivity : AppCompatActivity() {
     }
 
     private fun filterListe(){
-        val newList = listeDeContact
-            .filter { if(switch_favoris.isChecked) it.isFavoris() else true }
-            .filter {if(search.isNotEmpty()) it.getPrenom().contains(search) else true }
+        this.filteredContactList = listeDeContact
+            .filter { if(switch_favoris.isChecked){
+                it.isFavoris()
+            }
+            else true }
 
-        filteredContactList.plus(newList)
+            .filter {if(search.isNotEmpty()){
+                it.getPrenom().contains(search,true)
+            }
+            else true }
+
+        println("taille "+filteredContactList.size)
+
+        //filteredContactList.plus(newList)
+        /*adapater =  PersonAdapater(this@FirstActivity,applicationContext,filteredContactList) {
+            //filterListe()
+            listeDeContact.remove(it)
+
+        }*/
         adapater.notifyDataSetChanged()
+
     }
 
     //save data to sharedpreferences

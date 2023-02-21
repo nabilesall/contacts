@@ -66,7 +66,7 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
 
         view.findViewById<Button>(R.id.appeler_contact).setOnClickListener {
             val appelIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:$telephone"))
-            startActivity(context,appelIntent,null)
+            startActivity(activity,appelIntent,null)
         }
 
         view.findViewById<Button>(R.id.message_contact).setOnClickListener {
@@ -74,7 +74,7 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
             messageIntent.type = "vnd.android-dir/mms-sms"
             messageIntent.putExtra("address", telephone)
             messageIntent.putExtra("sms_body", "Héhé efface ça et mets ton message")
-            startActivity(context,messageIntent, null)
+            startActivity(activity,messageIntent, null)
         }
 
         view.findViewById<Button>(R.id.modifier_contact).setOnClickListener {
@@ -98,7 +98,6 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
             onRemoved.invoke(personneCourrante)
             //FirstActivity().editNumberConatcts(listeContact.size.toString(),context)
             Log.e("size ", listeContact.size.toString())
-
 
             true
         }
