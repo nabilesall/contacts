@@ -3,7 +3,6 @@ package com.idrissa.tp1.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -37,7 +36,6 @@ class FirstActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.first_activity)
 
-
         loadData()
         adapater =  PersonAdapater(this@FirstActivity,applicationContext,filteredContactList) {
             filterListe()
@@ -47,7 +45,6 @@ class FirstActivity : AppCompatActivity() {
         liste_de_contact.adapter = adapater
 
         barre_de_recherche.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
             override fun onQueryTextSubmit(query: String?): Boolean {
                 search = query ?: ""
                 return false
@@ -68,9 +65,8 @@ class FirstActivity : AppCompatActivity() {
 
         switch_favoris.setOnCheckedChangeListener { buttonView, isChecked ->
             filterListe()
-            Toast.makeText(this,"clik",Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this,"clik",Toast.LENGTH_SHORT).show()
         }
-
     }
 
     private fun filterListe(){
@@ -85,7 +81,7 @@ class FirstActivity : AppCompatActivity() {
             }
             else true }
 
-        println("taille "+filteredContactList.size)
+        //println("taille "+filteredContactList.size)
 
         //filteredContactList.plus(newList)
         /*adapater =  PersonAdapater(this@FirstActivity,applicationContext,filteredContactList) {
@@ -94,7 +90,6 @@ class FirstActivity : AppCompatActivity() {
 
         }*/
         adapater.notifyDataSetChanged()
-
     }
 
     //save data to sharedpreferences
@@ -138,11 +133,6 @@ class FirstActivity : AppCompatActivity() {
 
     private fun addListeDeContact(person: Person){
         listeDeContact.add(person)
-    }
-
-    fun setListeDeContact(listeDeContact : ArrayList<Person>){
-        this.listeDeContact = listeDeContact
-        //this.saveData()
     }
 
     @SuppressLint("SetTextI18n")
