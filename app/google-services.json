@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "235428855910",
+    "project_id": "tp3bonus",
+    "storage_bucket": "tp3bonus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235428855910:android:78e5785ed249f91071ada7",
+        "android_client_info": {
+          "package_name": "com.idrissa.tp1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235428855910-nav54qate4gqfordj567oj5gf6hgpe59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoaOlPG5MyW76yBgogrcGQgbnytCPKuzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235428855910-nav54qate4gqfordj567oj5gf6hgpe59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Tp3</string>
+    <string name="rb_homme">Homme</string>
+    <string name="rb_femme">Femme</string>
+    <string name="rb_autre">Autre</string>
+
+    <string name="content_desc_img">Image de profil</string>
+    <string name="fav">Ajouter aux favoris</string>
+    <string name="submt_btn">Enregistrer</string>
+    <string name="hint_prenom">Prénom</string>
+    <string name="hint_nom">Nom</string>
+    <string name="hint_birth">Date de naissance</string>
+    <string name="hint_numero">Numéro de téléphone</string>
+    <string name="hint_mail">Adresse électronique</string>
+    <string name="sbNom">Le champ nom ne doit pas être vide !</string>
+    <string name="sbPrenom">Le champ prénom ne doit pas être vide !</string>
+    <string name="sbMail">Le champ addresse électronique ne doit pas être vide !</string>
+    <string name="sbErrMail">Invalide addresse électronique!</string>
+
+    <string name="textButtonPrincActivity">Ajouter un contact</string>
+    <string name="popuptitre">Titre</string>
+    <string name="msgpopup">message</string>
+    <string name="titrepopup">Récapitulation</string>
+    <string name="msgImgDeCouv">Comment voulez-vous ajouter une photo</string>
+    <string name="titreImgDeCouv">Ajour une photo</string>
+    <string name="titreAutorisation">Autorisation Réquise</string>
+    <string name="nonBouton">Non</string>
+    <string name="ouiBouton">Oui</string>
+    <string name="msgErrorPhoto">Impossible de prendre une photo</string>
+    <string name="nom_et_pr_nom">nom et prénom</string>
+    <string name="_tel">0707070707</string>
+    <string name="photo_de_profil">photo de profil</string>
+    <string name="appeler">Appeler</string>
+    <string name="modifier">Modifier</string>
+    <string name="message">Message</string>
+    <string name="switch_favoris">Favoris</string>
+
+
+</resources>

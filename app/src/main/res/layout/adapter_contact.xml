@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_margin="25dp"
+    android:padding="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/photo_contact"
+        android:layout_width="72dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/photo_de_profil"
+        android:src="@drawable/homme" />
+
+    <RelativeLayout
+        android:layout_width="256dp"
+        android:layout_height="86dp"
+        android:layout_marginEnd="15dp">
+
+        <TextView
+            android:id="@+id/nom_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nom_et_pr_nom" />
+
+        <TextView
+            android:id="@+id/telephone_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nom_contact"
+            android:text="@string/_tel" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/telephone_contact">
+
+            <Button
+                android:id="@+id/appeler_contact"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="@dimen/width_btn"
+                android:layout_height="@dimen/height_btn"
+                android:layout_marginEnd="10dp"
+                android:text="@string/appeler"
+                android:textColor="@color/teal_700"
+                android:textSize="@dimen/text_size_btn"
+                tools:ignore="SmallSp" />
+
+            <Button
+                android:id="@+id/message_contact"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="@dimen/width_btn"
+                android:layout_height="@dimen/height_btn"
+                android:layout_marginEnd="10dp"
+                android:text="@string/message"
+                android:textColor="@color/teal_700"
+                android:textSize="@dimen/text_size_btn"
+                tools:ignore="SmallSp" />
+
+            <Button
+                android:id="@+id/modifier_contact"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="@dimen/width_btn"
+                android:layout_height="@dimen/height_btn"
+                android:text="@string/modifier"
+                android:textColor="@color/teal_200"
+                android:textSize="@dimen/text_size_btn" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
