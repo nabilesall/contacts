@@ -217,7 +217,6 @@ class MainActivity : AppCompatActivity() {
 
                 popupDialogPermAppPhoto.getLeftButtonPopup().setOnClickListener{
                     popupDialogPermAppPhoto.dismiss()
-                    //popupDialog.dismiss()
                 }
 
                 popupDialogPermAppPhoto.getRightButtonPopup().setOnClickListener{

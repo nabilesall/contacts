@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="5dp"
-    tools:viewBindingIgnore="true" >
     >
 
     <SearchView
@@ -22,7 +21,7 @@
         tools:layout_editor_absoluteX="5dp"
         tools:layout_editor_absoluteY="44dp" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/liste_de_contact"
         android:layout_width="393dp"
         android:layout_height="524dp"

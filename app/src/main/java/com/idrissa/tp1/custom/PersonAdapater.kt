@@ -99,10 +99,6 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
             //FirstActivity().editNumberConatcts(listeContact.size.toString(),context)
             Log.e("size ", listeContact.size.toString())
 
-           // notifyDataSetChanged()
-            //FirstActivity().setListeDeContact(listeContact)
-
-            //makeText(context, count.toString()  , Toast.LENGTH_SHORT).show()
 
             true
         }

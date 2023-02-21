@@ -3,7 +3,6 @@ package com.idrissa.tp1.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +16,6 @@ import kotlinx.android.synthetic.main.adapter_contact.*
 import kotlinx.android.synthetic.main.first_activity.*
 import java.io.*
 import java.lang.reflect.Type
-import java.util.Scanner
 
 
 @Suppress("DEPRECATION")
@@ -38,6 +36,7 @@ class FirstActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.first_activity)
 
+
         loadData()
         adapater =  PersonAdapater(this@FirstActivity,applicationContext,filteredContactList) {
             listeDeContact.remove(it)
@@ -50,48 +49,14 @@ class FirstActivity : AppCompatActivity() {
             val listContactFound  = ArrayList<Person>()
             override fun onQueryTextSubmit(query: String?): Boolean {
                 search = query ?: ""
-                /*listContactFound.clear()
-                for (personFound in listeDeContact){
-                    if(personFound.getNom().contains(query) || personFound.getPrenom().contains(query) || personFound.getTelephne().contains(query) ){
-                        listContactFound.add(personFound)
-                    }
-                }
-                if (listContactFound.size != 0) {
-                    liste_de_contact.adapter = PersonAdapater(this@FirstActivity,applicationContext,listContactFound)
-                }*/
                 return false
             }
 
             override fun onQueryTextChange(query: String?): Boolean {
                 search = query ?: ""
-                //listContactFound.clear()
-                /*if (query!!.isEmpty()){
-                    loadData()
-                }
-                for (personFound in listeDeContact){
-                    if(personFound.getNom().contains(query,true) || personFound.getPrenom().contains(query,true) || personFound.getTelephne().contains(query,true) ){
-                        listContactFound.add(personFound)
-                    }
-                }
-
-                if (listContactFound.size != 0) {
-                    liste_de_contact.adapter = PersonAdapater(this@FirstActivity,applicationContext,listContactFound)
-                } else {
-                    Toast.makeText(applicationContext, "Aucun contact ne correspond à votre recherche", Toast.LENGTH_SHORT)
-                    .show()
-                }*/
                 return false
             }
         })
-
-        /*listeDeContact.add(Person("nabile","Idrissa",707070707))
-        listeDeContact.add(Person("nabile","Idrissa",854840584))
-        listeDeContact.add(Person("Idrissa","way",854840584))*/
-
-        /*if(listeDeContact.size == 0){
-            textView.text  = "Vous n'avez aucun contact enregistré"
-        }*/
-
 
         toForm.setOnClickListener{
             val int = Intent(this, MainActivity::class.java)
@@ -116,11 +81,7 @@ class FirstActivity : AppCompatActivity() {
         adapater.notifyDataSetChanged()
     }
 
-    override fun onStop() {
-        super.onStop()
-        this.saveData()
-    }
-
+    //save data to sharedpreferences
     @SuppressLint("CommitPrefEdits")
     fun saveData(){
         val sp = this@FirstActivity.getSharedPreferences(spname, MODE_PRIVATE)
@@ -134,6 +95,7 @@ class FirstActivity : AppCompatActivity() {
         loadData()
     }
 
+    //to load the data from sharedpreferences
     fun loadData() {
         this.listeDeContact.clear()
         val sp = applicationContext.getSharedPreferences(spname, MODE_PRIVATE)
@@ -165,7 +127,6 @@ class FirstActivity : AppCompatActivity() {
     fun setListeDeContact(listeDeContact : ArrayList<Person>){
         this.listeDeContact = listeDeContact
         //this.saveData()
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -186,10 +147,13 @@ class FirstActivity : AppCompatActivity() {
             val mail = data?.getStringExtra("mail").toString()
             val fav = data?.getBooleanExtra("favoris",true)
 
+            //We check if the origin action is for add a new person
             if(action == "add"){
                 val person = Person(nom, prenom, datenaiss, telephone, mail, fav!!)
                 addListeDeContact(person)
             }
+
+            //for update
             else if (action == "update"){
                 val pos= data.getStringExtra("index").toString()
 
@@ -209,55 +173,12 @@ class FirstActivity : AppCompatActivity() {
 
             // set the result to the text view
             Toast.makeText(this, "Enregistré", Toast.LENGTH_SHORT).show()
-            //tvPrincAct.text = result.toString()
         }
     }
 
-
-    private fun saveDataWithoutObject(){
-        val dataToSave = this.listeDeContact
-        //val prs = Person("Leye","Idrissa",70709492)
-
-        try {
-            val fos = openFileOutput(FILENAME, MODE_PRIVATE)
-
-            for (dts in dataToSave){
-                val donneePersonnelle = dts.getNom()+ " " + dts.getPrenom()+ " " + /*dts.getTelephne().toString() + */"\n"
-                fos.write(donneePersonnelle.toByteArray())
-            }
-
-            fos.close()
-            Toast.makeText(this, "Liste enregistré", Toast.LENGTH_SHORT).show()
-
-        }catch (err : FileNotFoundException){
-            err.printStackTrace()
-            Log.e("save","Error dans le sauvegade")
-        }
-    }
-
-    private fun loadDataWithoutData(){
-        try {
-            val file = File(FILENAME)
-            val s = Scanner(file)
-            while (s.hasNextLine()){
-                println(s.nextLine())
-            }
-
-            //val str : ByteArray = fis.readBytes()
-            //Log.e("Reussie", "$str")
-
-
-        } catch (err: FileNotFoundException) {
-            Log.e("Lecture", "Lecture échouée")
-        }
-        /*this.listeDeContact.clear()
-        val fis = FileInputStream("FILE_NAME")
-        val ois = ObjectInputStream(fis)
-        this.listeDeContact = ois.readObject() as ArrayList<Person>
-        ois.close()
-        fis.close()
-
-        Toast.makeText(this, "Donnée restaurée", Toast.LENGTH_SHORT).show()*/
+    override fun onStop() {
+        super.onStop()
+        this.saveData()
     }
 }
 
