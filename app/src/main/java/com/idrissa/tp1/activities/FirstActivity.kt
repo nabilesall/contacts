@@ -79,7 +79,9 @@ class FirstActivity : AppCompatActivity() {
             else true }
 
             .filter {if(search.isNotEmpty()){
-                it.getPrenom().contains(search,true)
+                it.getPrenom().contains(search,true) ||
+                        it.getNom().contains(search,true) ||
+                        it.getTelephne().contains(search,true)
             }
             else true }
 

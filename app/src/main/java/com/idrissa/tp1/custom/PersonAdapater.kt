@@ -71,14 +71,12 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
         view.findViewById<TextView>(R.id.telephone_contact).text = telephone
         //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage.toUri())
         if(linkimage != "null"){
-            Log.e("dans link image","il y'a bien un lien")
             //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage.toUri())
         }else{
-            val path : Int = context.resources.getIdentifier(genre,"drawable",context.packageName)
-            view.findViewById<ImageView>(R.id.photo_contact).setImageResource(path)
-            Log.e("else ","link vide")
-        }
+            view.findViewById<ImageView>(R.id.photo_contact)
+                .setImageResource(context.resources.getIdentifier(genre,"drawable",context.packageName))
 
+        }
 
         view.findViewById<Button>(R.id.appeler_contact).setOnClickListener {
             val appelIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:$telephone"))
