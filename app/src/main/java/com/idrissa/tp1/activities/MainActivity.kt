@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     private var gallerycode = 7187
     private var cameracode = 897498
 
-    private var linkImage : Uri? = null
+    private var linkImage : Uri = Uri.EMPTY
 
     private lateinit var actionAFaire : String
     private var indexContact : String = ""
@@ -199,7 +199,9 @@ class MainActivity : AppCompatActivity() {
                 intentMainAct.putExtra("mail",this.adrMail)
                 intentMainAct.putExtra("favoris",this.etatCB)
                 intentMainAct.putExtra("index",this.indexContact)
-                intentMainAct.data = linkImage
+                if(linkImage != Uri.EMPTY){
+                    intentMainAct.data  = linkImage
+                }
 
                 setResult(Activity.RESULT_OK, intentMainAct)
 

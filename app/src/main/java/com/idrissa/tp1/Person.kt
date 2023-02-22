@@ -56,15 +56,5 @@ class Person(
     fun setMail(mail: String) { this.mail = mail }
     fun setFavoris(favoris : Boolean) { this.favoris = favoris }
     fun setLinkImage(linkImage: String){ this.linkImage = linkImage }
-
-
-    /*override fun equals(other: Any?): Boolean {
-        if(this.nom == other)
-            return true
-        if(this.prenom.contentEquals(other.toString()))
-            return true
-        return super.equals(other)
-    }*/
-
 }
 

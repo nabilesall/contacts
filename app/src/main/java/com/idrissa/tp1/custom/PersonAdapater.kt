@@ -65,13 +65,18 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
         val fav = personneCourrante.isFavoris()
         val linkimage = personneCourrante.getLinkImage()
 
-        //Log.e("dans link image",linkimage)
-
         view.findViewById<TextView>(R.id.nom_contact).text = "$prenom $nom"
         view.findViewById<TextView>(R.id.telephone_contact).text = telephone
         //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage.toUri())
         if(linkimage != "null"){
-            //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage.toUri())
+            //Log.e("uri",linkimage)
+            try {
+                //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage.toUri())
+            }catch (ex : java.lang.Exception){
+                ex.printStackTrace()
+                Log.e("erreur","$ex")
+            }
+
         }else{
             view.findViewById<ImageView>(R.id.photo_contact)
                 .setImageResource(context.resources.getIdentifier(genre,"drawable",context.packageName))
