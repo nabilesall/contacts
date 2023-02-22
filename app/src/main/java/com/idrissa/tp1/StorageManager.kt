@@ -7,17 +7,14 @@ import com.idrissa.tp1.activities.MainActivity
 import java.util.Calendar
 
 class StorageManager {
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }*/
+
     private val _tag = "Storage Manager"
     private var urlImage : String = ""
 
     private val storageRef = FirebaseStorage.getInstance().reference
 
     fun telechargerImage (imageUri: Uri){
-        MainActivity().setLinkImage("dans telechargement")
+        //MainActivity().setLinkImage("dans telechargement")
         //val sd = getFileName(context, imageUri!!)
         val pathDate = Calendar.getInstance().timeInMillis.toString() + ".jpg"
         // Upload Task with upload to directory 'file'

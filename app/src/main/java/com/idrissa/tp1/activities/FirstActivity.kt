@@ -2,7 +2,9 @@ package com.idrissa.tp1.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -38,8 +40,8 @@ class FirstActivity : AppCompatActivity() {
 
         loadData()
         adapater =  PersonAdapater(this@FirstActivity,applicationContext,filteredContactList) {
-            filterListe()
             listeDeContact.remove(it)
+            filterListe()
 
         }
         liste_de_contact.adapter = adapater
@@ -89,7 +91,56 @@ class FirstActivity : AppCompatActivity() {
             listeDeContact.remove(it)
 
         }*/
-        adapater.notifyDataSetChanged()
+        adapater.setListContact(filteredContactList)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 0 && resultCode == RESULT_OK){
+            // Get the result from data
+            val action  = data?.getStringExtra("action")
+            val nom = data?.getStringExtra("nom").toString()
+            val prenom = data?.getStringExtra("prenom").toString()
+            val datenaiss = data?.getStringExtra("dateNaiss").toString()
+            val telephone = data?.getStringExtra("telephone").toString()
+            val mail = data?.getStringExtra("mail").toString()
+            val fav = data?.getBooleanExtra("favoris",true)
+            val imageuri = data?.getStringExtra("imageuri").toString()
+            Log.e("image lien", "$imageuri")
+            //val person = data?.getSerializableExtra("im")
+            //Uri.parse()
+
+            //We check if the origin action is for add a new person
+            if(action == "add"){
+                val person = Person(nom, prenom, datenaiss, telephone, mail, fav!!,imageuri)
+                addListeDeContact(person)
+            }
+
+            //for update
+            else if (action == "update"){
+                val pos= data.getStringExtra("index").toString()
+
+                val currPerson = this.listeDeContact[pos.toInt()]
+                currPerson.setNom(nom)
+                currPerson.setPrenom(prenom)
+                currPerson.setDateNaiss(datenaiss)
+                currPerson.setTelephone(telephone)
+                currPerson.setMail(mail)
+                currPerson.setFavoris(fav.toString().toBoolean())
+                currPerson.setLinkImage(imageuri)
+            }
+
+            filterListe()
+
+            /*val personadap = PersonAdapater(this@FirstActivity,this,listeDeContact)
+            liste_de_contact.adapter = personadap
+            editNumberConatcts(personadap.count.toString())
+            this.saveData()*/
+
+            // set the result to the text view
+            Toast.makeText(this, "Enregistré", Toast.LENGTH_SHORT).show()
+        }
     }
 
     //save data to sharedpreferences
@@ -133,53 +184,12 @@ class FirstActivity : AppCompatActivity() {
 
     private fun addListeDeContact(person: Person){
         listeDeContact.add(person)
+        //filterListe()
     }
 
     @SuppressLint("SetTextI18n")
     fun editNumberConatcts(nb: Any){
         textView.text = "$nb Contacts"
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 0 && resultCode == RESULT_OK){
-            // Get the result from data
-            val action  = data?.getStringExtra("action")
-            val nom = data?.getStringExtra("nom").toString()
-            val prenom = data?.getStringExtra("prenom").toString()
-            val datenaiss = data?.getStringExtra("dateNaiss").toString()
-            val telephone = data?.getStringExtra("telephone").toString()
-            val mail = data?.getStringExtra("mail").toString()
-            val fav = data?.getBooleanExtra("favoris",true)
-
-            //We check if the origin action is for add a new person
-            if(action == "add"){
-                val person = Person(nom, prenom, datenaiss, telephone, mail, fav!!)
-                addListeDeContact(person)
-            }
-
-            //for update
-            else if (action == "update"){
-                val pos= data.getStringExtra("index").toString()
-
-                val currPerson = this.listeDeContact[pos.toInt()]
-                currPerson.setNom(nom)
-                currPerson.setPrenom(prenom)
-                currPerson.setDateNaiss(datenaiss)
-                currPerson.setTelephone(telephone)
-                currPerson.setMail(mail)
-                currPerson.setFavoris(fav.toString().toBoolean())
-            }
-
-            /*val personadap = PersonAdapater(this@FirstActivity,this,listeDeContact)
-            liste_de_contact.adapter = personadap
-            editNumberConatcts(personadap.count.toString())
-            this.saveData()*/
-
-            // set the result to the text view
-            Toast.makeText(this, "Enregistré", Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun onStop() {

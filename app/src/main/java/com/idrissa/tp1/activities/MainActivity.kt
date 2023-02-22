@@ -44,13 +44,13 @@ class MainActivity : AppCompatActivity() {
     private var gallerycode = 7187
     private var cameracode = 897498
 
-    private var linkImage : String = ""
+    private lateinit var linkImage : Uri
 
     private lateinit var actionAFaire : String
     private var indexContact : String = ""
 
 
-    fun setLinkImage(link : String){this.linkImage = link}
+    //fun setLinkImage(link : String){this.linkImage = link}
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @SuppressLint("ResourceType", "QueryPermissionsNeeded", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,10 +108,6 @@ class MainActivity : AppCompatActivity() {
 
         //bouton de validation
         validate_btn.setOnClickListener {
-
-            println("avant url")
-            println("url : " + this.linkImage)
-            println("après url")
 
             val selectedId = groupeGenre.checkedRadioButtonId
 
@@ -182,6 +178,7 @@ class MainActivity : AppCompatActivity() {
                 intentMainAct.putExtra("mail",this.adrMail)
                 intentMainAct.putExtra("favoris",this.etatCB)
                 intentMainAct.putExtra("index",this.indexContact)
+                intentMainAct.putExtra("imageuri",this.linkImage.toString())
 
                 setResult(Activity.RESULT_OK, intentMainAct)
 
@@ -307,19 +304,22 @@ class MainActivity : AppCompatActivity() {
         if(resultCode == Activity.RESULT_OK){
             when(requestCode){
                 gallerycode ->{
-                    val stm = StorageManager()
-                    imgDeCouverture.setImageURI(data!!.data)
+                    //val stm = StorageManager()
+                    val fileUriGall = data!!.data
+                    if (fileUriGall != null) {
+                        this.linkImage = fileUriGall
+                    }
+                    imgDeCouverture.setImageURI(fileUriGall)
                     //this.linkImage = StorageManager().urlImage
 
-                    data.data?.let { stm.telechargerImage(it)}
+                    //data.data?.let { stm.telechargerImage(it)}
 
                     this.imageUploaded = true
-                    println("*******url ***************"+stm.getUrl())
 
                 }
 
                 cameracode ->{
-                    val fileUri = Uri.fromFile(file)
+                    val fileUriCamera = Uri.fromFile(file)
                     /*
                     //val imageChoisie = data?.extras?.get("data") as Bitmap
                     //imgDeCouverture.setImageBitmap(imageChoisie)
@@ -332,8 +332,8 @@ class MainActivity : AppCompatActivity() {
                     imgDeCouverture.setImageURI(uri)
                     StorageManager().TelechargerImage(this, uri)*/
 
-                    imgDeCouverture.setImageURI(fileUri)
-                    StorageManager().telechargerImage(fileUri)
+                    imgDeCouverture.setImageURI(fileUriCamera)
+                    //StorageManager().telechargerImage(fileUri)
                     this.imageUploaded = true
                     //this.linkImage = StorageManager().getUrl()
                 }

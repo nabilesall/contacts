@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.makeText
@@ -62,6 +63,7 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
 
         view.findViewById<TextView>(R.id.nom_contact).text = "$prenom $nom"
         view.findViewById<TextView>(R.id.telephone_contact).text = telephone
+        view.findViewById<ImageView>(R.id.photo_contact).setImageResource(R.drawable.femme)
 
         view.findViewById<Button>(R.id.appeler_contact).setOnClickListener {
             val appelIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:$telephone"))
@@ -98,8 +100,14 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
             //FirstActivity().editNumberConatcts(listeContact.size.toString(),context)
             Log.e("size ", listeContact.size.toString())
 
+            notifyDataSetChanged()
             true
         }
         return view
+    }
+
+    fun setListContact(listeContact: List<Person>){
+        this.listeContact = listeContact
+        notifyDataSetChanged()
     }
 }

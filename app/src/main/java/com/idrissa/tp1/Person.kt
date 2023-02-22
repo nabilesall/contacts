@@ -1,5 +1,7 @@
 package com.idrissa.tp1
 
+import android.net.Uri
+
 class Person(
     nom :String,
     prenom : String,
@@ -7,7 +9,8 @@ class Person(
     dateNaiss: String,
     telephone : String,
     mail : String,
-    favoris : Boolean) {
+    favoris : Boolean,
+    linkImage : String) {
 
     private var nom : String
     private var prenom : String
@@ -15,6 +18,7 @@ class Person(
     private var telephone : String
     private var mail : String
     private var favoris : Boolean
+    private var linkImage : String
 
     init {
         this.nom = nom
@@ -23,6 +27,7 @@ class Person(
         this.telephone = telephone
         this.mail = mail
         this.favoris = favoris
+        this.linkImage = linkImage
 
     }
     fun getNom() : String{ return this.nom }
@@ -36,12 +41,15 @@ class Person(
         return this.mail}
     fun isFavoris() : Boolean { return this.favoris}
 
+    fun getLinkImage() : String{ return this.linkImage }
+
     fun setNom(nom: String) { this.nom = nom }
     fun setPrenom(prenom: String) { this.prenom = prenom }
     fun setDateNaiss(dateNaiss: String) {this.dateNaiss = dateNaiss }
     fun setTelephone(telephone: String) { this.telephone = telephone }
     fun setMail(mail: String) { this.mail = mail }
     fun setFavoris(favoris : Boolean) { this.favoris = favoris }
+    fun setLinkImage(linkImage: String){ this.linkImage = linkImage }
 
 
     /*override fun equals(other: Any?): Boolean {
