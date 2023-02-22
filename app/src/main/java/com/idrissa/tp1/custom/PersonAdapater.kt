@@ -17,9 +17,11 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.net.toUri
 import com.idrissa.tp1.Person
 import com.idrissa.tp1.R
 import com.idrissa.tp1.activities.*
+import kotlin.math.log
 
 
 class PersonAdapater(activity: FirstActivity, context : Context, listeContact : List<Person>, val onRemoved: (Person) -> Unit) : BaseAdapter() {
@@ -56,14 +58,27 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
         val personneCourrante = getItem(position) as Person
         val nom = personneCourrante.getNom()
         val prenom = personneCourrante.getPrenom()
+        val genre = personneCourrante.getGenre()
         val date = personneCourrante.getDateNaiss()
         val telephone = personneCourrante.getTelephne()
         val mail = personneCourrante.getMail()
         val fav = personneCourrante.isFavoris()
+        val linkimage = personneCourrante.getLinkImage()
+
+        //Log.e("dans link image",linkimage)
 
         view.findViewById<TextView>(R.id.nom_contact).text = "$prenom $nom"
         view.findViewById<TextView>(R.id.telephone_contact).text = telephone
-        view.findViewById<ImageView>(R.id.photo_contact).setImageResource(R.drawable.femme)
+        //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage.toUri())
+        if(linkimage != "null"){
+            Log.e("dans link image","il y'a bien un lien")
+            //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage.toUri())
+        }else{
+            val path : Int = context.resources.getIdentifier(genre,"drawable",context.packageName)
+            view.findViewById<ImageView>(R.id.photo_contact).setImageResource(path)
+            Log.e("else ","link vide")
+        }
+
 
         view.findViewById<Button>(R.id.appeler_contact).setOnClickListener {
             val appelIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:$telephone"))
@@ -81,8 +96,10 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
         view.findViewById<Button>(R.id.modifier_contact).setOnClickListener {
             val modifIntent = Intent(context, MainActivity::class.java)
                 .putExtra("action","update")
+                .putExtra("img",linkimage)
                 .putExtra("lastName",nom)
                 .putExtra("firstName",prenom)
+                .putExtra("genre",genre)
                 .putExtra("dateNaiss",date)
                 .putExtra("num",telephone)
                 .putExtra("mail",mail)
@@ -92,7 +109,7 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
         }
 
         view.setOnClickListener{
-            makeText(context, "$prenom $nom"  , Toast.LENGTH_SHORT).show()
+            makeText(context, linkimage, Toast.LENGTH_SHORT).show()
         }
 
         view.setOnLongClickListener {

@@ -102,18 +102,19 @@ class FirstActivity : AppCompatActivity() {
             val action  = data?.getStringExtra("action")
             val nom = data?.getStringExtra("nom").toString()
             val prenom = data?.getStringExtra("prenom").toString()
+            val genre = data?.getStringExtra("genre").toString()
             val datenaiss = data?.getStringExtra("dateNaiss").toString()
             val telephone = data?.getStringExtra("telephone").toString()
             val mail = data?.getStringExtra("mail").toString()
             val fav = data?.getBooleanExtra("favoris",true)
-            val imageuri = data?.getStringExtra("imageuri").toString()
+            val imageuri : Uri? = data?.data
             Log.e("image lien", "$imageuri")
             //val person = data?.getSerializableExtra("im")
             //Uri.parse()
 
             //We check if the origin action is for add a new person
             if(action == "add"){
-                val person = Person(nom, prenom, datenaiss, telephone, mail, fav!!,imageuri)
+                val person = Person(nom, prenom,genre, datenaiss, telephone, mail, fav!!,"$imageuri")
                 addListeDeContact(person)
             }
 
@@ -124,11 +125,12 @@ class FirstActivity : AppCompatActivity() {
                 val currPerson = this.listeDeContact[pos.toInt()]
                 currPerson.setNom(nom)
                 currPerson.setPrenom(prenom)
+                currPerson.setGenre(genre)
                 currPerson.setDateNaiss(datenaiss)
                 currPerson.setTelephone(telephone)
                 currPerson.setMail(mail)
                 currPerson.setFavoris(fav.toString().toBoolean())
-                currPerson.setLinkImage(imageuri)
+                currPerson.setLinkImage(imageuri.toString())
             }
 
             filterListe()

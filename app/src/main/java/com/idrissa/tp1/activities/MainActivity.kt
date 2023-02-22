@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Environment.DIRECTORY_PICTURES
 import android.provider.MediaStore
 import android.provider.OpenableColumns.*
+import android.util.Log
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     private var gallerycode = 7187
     private var cameracode = 897498
 
-    private lateinit var linkImage : Uri
+    private var linkImage : Uri? = null
 
     private lateinit var actionAFaire : String
     private var indexContact : String = ""
@@ -67,6 +68,25 @@ class MainActivity : AppCompatActivity() {
         }
         else if(actionAFaire == "update"){
             val results  = intent?.extras
+            val linkImg = results?.getString("img").toString()
+            val genre = results?.getString("genre").toString()
+
+            if(linkImg == "null"){
+                imgDeCouverture.setImageResource(this.resources.getIdentifier(genre,"drawable",this.packageName))
+            }
+
+            when (genre) {
+                "homme" -> {
+                    groupeGenre.check(homme_btn.id)
+                }
+                "femme" -> {
+                    groupeGenre.check(femme_btn.id)
+                }
+                else -> {
+                    groupeGenre.check(autre_btn.id)
+                }
+            }
+
             inputNom.setText(results?.getString("lastName").toString())
             inputPrenom.setText(results?.getString("firstName").toString())
             inputBirth.setText(results?.getString("dateNaiss").toString())
@@ -153,7 +173,7 @@ class MainActivity : AppCompatActivity() {
                                     "Numéro de téléphone: "+ this.numereTelephone +"\n"+
                                     "Adresse Electronique: "+ this.adrMail + "\n"+
                                     "Ajouter aux favoris: "+ if(this.etatCB)  "Oui" else "Non" + "\n"+
-                                    "link Image : "+ this.linkImage
+                                    "link Image : "
 
             val popupDialog = PopupDialog(this)
             popupDialog.setTitrePopupDialog(getString(R.string.titrepopup))
@@ -173,12 +193,13 @@ class MainActivity : AppCompatActivity() {
 
                 intentMainAct.putExtra("nom", this.nom)
                 intentMainAct.putExtra("prenom", this.prenom)
+                intentMainAct.putExtra("genre",this.genreSelected)
                 intentMainAct.putExtra("dateNaiss",this.birth)
                 intentMainAct.putExtra("telephone", this.numereTelephone)
                 intentMainAct.putExtra("mail",this.adrMail)
                 intentMainAct.putExtra("favoris",this.etatCB)
                 intentMainAct.putExtra("index",this.indexContact)
-                intentMainAct.putExtra("imageuri",this.linkImage.toString())
+                intentMainAct.data = linkImage
 
                 setResult(Activity.RESULT_OK, intentMainAct)
 
@@ -306,9 +327,7 @@ class MainActivity : AppCompatActivity() {
                 gallerycode ->{
                     //val stm = StorageManager()
                     val fileUriGall = data!!.data
-                    if (fileUriGall != null) {
-                        this.linkImage = fileUriGall
-                    }
+                    if (fileUriGall != null) this.linkImage = fileUriGall
                     imgDeCouverture.setImageURI(fileUriGall)
                     //this.linkImage = StorageManager().urlImage
 

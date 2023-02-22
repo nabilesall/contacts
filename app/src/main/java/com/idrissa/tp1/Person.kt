@@ -5,7 +5,7 @@ import android.net.Uri
 class Person(
     nom :String,
     prenom : String,
-    /*var genre : GenreType,*/
+    genre : String,
     dateNaiss: String,
     telephone : String,
     mail : String,
@@ -14,15 +14,17 @@ class Person(
 
     private var nom : String
     private var prenom : String
+    private var genre : String ="femme"
     private var dateNaiss : String
     private var telephone : String
     private var mail : String
     private var favoris : Boolean
-    private var linkImage : String
+    private var linkImage : String = "empty"
 
     init {
         this.nom = nom
         this.prenom = prenom
+        this.genre = genre
         this.dateNaiss = dateNaiss
         this.telephone = telephone
         this.mail = mail
@@ -32,6 +34,9 @@ class Person(
     }
     fun getNom() : String{ return this.nom }
     fun getPrenom() : String { return this.prenom }
+    fun getGenre() : String {
+        if (this.genre == null || this.genre == "Autre") return "femme"
+        return this.genre.lowercase()}
     fun getDateNaiss() : String {
         if(this.dateNaiss == null) return "Ajoutez une date de naissance"
         return this.dateNaiss }
@@ -45,6 +50,7 @@ class Person(
 
     fun setNom(nom: String) { this.nom = nom }
     fun setPrenom(prenom: String) { this.prenom = prenom }
+    fun setGenre(genre: String) { this.genre = genre}
     fun setDateNaiss(dateNaiss: String) {this.dateNaiss = dateNaiss }
     fun setTelephone(telephone: String) { this.telephone = telephone }
     fun setMail(mail: String) { this.mail = mail }
