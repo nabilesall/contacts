@@ -13,7 +13,7 @@ import com.google.gson.reflect.*
 import com.idrissa.tp1.Person
 import com.idrissa.tp1.R
 import com.idrissa.tp1.custom.PersonAdapater
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_form.*
 import kotlinx.android.synthetic.main.adapter_contact.*
 import kotlinx.android.synthetic.main.first_activity.*
 import java.io.*
@@ -24,7 +24,6 @@ import java.lang.reflect.Type
 class FirstActivity : AppCompatActivity() {
     private var listeDeContact = mutableListOf<Person>()
     private var filteredContactList  = emptyList<Person>()
-    private val FILENAME : String = "ListesContact.txt"
     private val spname : String = "myContatcs"
     private lateinit var adapater: PersonAdapater
 
@@ -46,6 +45,9 @@ class FirstActivity : AppCompatActivity() {
         }
         liste_de_contact.adapter = adapater
 
+        /**
+         * search bar on contact list
+         */
         barre_de_recherche.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 search = query ?: ""
@@ -58,19 +60,29 @@ class FirstActivity : AppCompatActivity() {
             }
         })
 
+        /**
+         * favorite option
+         */
+        switch_favoris.setOnCheckedChangeListener { _, _ ->
+            filterListe()
+        }
+
+        /**
+         * button to the form activity
+         */
         toForm.setOnClickListener{
-            val int = Intent(this, MainActivity::class.java)
+            val int = Intent(this, FormActivity::class.java)
             int.putExtra("action","add")
             int.putExtra("firstName","Idrissa")
             startActivityForResult(int,0)
         }
 
-        switch_favoris.setOnCheckedChangeListener { buttonView, isChecked ->
-            filterListe()
-            //Toast.makeText(this,"clik",Toast.LENGTH_SHORT).show()
-        }
     }
 
+    /**
+     * this function filter the base list to display
+     * the search results or the favorite contacts
+     */
     private fun filterListe(){
         this.filteredContactList = listeDeContact
             .filter { if(switch_favoris.isChecked){
@@ -85,17 +97,13 @@ class FirstActivity : AppCompatActivity() {
             }
             else true }
 
-        //println("taille "+filteredContactList.size)
-
-        //filteredContactList.plus(newList)
-        /*adapater =  PersonAdapater(this@FirstActivity,applicationContext,filteredContactList) {
-            //filterListe()
-            listeDeContact.remove(it)
-
-        }*/
         adapater.setListContact(filteredContactList)
     }
 
+    /**
+     * this function reprsente the activity result.
+     * it restotres the data from the FormActivity
+     */
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -111,8 +119,6 @@ class FirstActivity : AppCompatActivity() {
             val fav = data?.getBooleanExtra("favoris",true)
             val imageuri : Uri? = data?.data
             Log.e("image lien", "$imageuri")
-            //val person = data?.getSerializableExtra("im")
-            //Uri.parse()
 
             //We check if the origin action is for add a new person
             if(action == "add"){
@@ -137,17 +143,13 @@ class FirstActivity : AppCompatActivity() {
 
             filterListe()
 
-            /*val personadap = PersonAdapater(this@FirstActivity,this,listeDeContact)
-            liste_de_contact.adapter = personadap
-            editNumberConatcts(personadap.count.toString())
-            this.saveData()*/
-
-            // set the result to the text view
             Toast.makeText(this, "Enregistré", Toast.LENGTH_SHORT).show()
         }
     }
 
-    //save data to sharedpreferences
+    /**
+     * save data to sharedpreferences
+     */
     @SuppressLint("CommitPrefEdits")
     fun saveData(){
         val sp = this@FirstActivity.getSharedPreferences(spname, MODE_PRIVATE)
@@ -161,8 +163,10 @@ class FirstActivity : AppCompatActivity() {
         loadData()
     }
 
-    //to load the data from sharedpreferences
-    fun loadData() {
+    /**
+     * load the data from sharedpreferences
+     */
+    private fun loadData() {
         this.listeDeContact.clear()
         val sp = applicationContext.getSharedPreferences(spname, MODE_PRIVATE)
         val gson = Gson()
@@ -186,11 +190,16 @@ class FirstActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * add a new person in our list contact
+     */
     private fun addListeDeContact(person: Person){
         listeDeContact.add(person)
-        //filterListe()
     }
 
+    /**
+     * display the number of registred contacts
+     */
     @SuppressLint("SetTextI18n")
     fun editNumberConatcts(nb: Any){
         textView.text = "$nb Contacts"

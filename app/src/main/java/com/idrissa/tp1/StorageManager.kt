@@ -3,7 +3,7 @@ package com.idrissa.tp1
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
-import com.idrissa.tp1.activities.MainActivity
+import com.idrissa.tp1.activities.FormActivity
 import java.util.Calendar
 
 class StorageManager {
@@ -30,7 +30,7 @@ class StorageManager {
                     .load(it)
                     .into(imgDeCouverture)*/
                 //this.imageUploaded = true
-                println(MainActivity())
+                println(FormActivity())
                 this.urlImage =it.toString()
                 //setUrl(this.urlImage)
                 //this.urlImage = urlImage.toString()

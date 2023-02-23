@@ -46,7 +46,7 @@ class Person(
         return this.mail}
     fun isFavoris() : Boolean { return this.favoris}
 
-    fun getLinkImage() : String{ return this.linkImage }
+    fun getLinkImageUri() : Uri{ return Uri.parse(this.linkImage) }
 
     fun setNom(nom: String) { this.nom = nom }
     fun setPrenom(prenom: String) { this.prenom = prenom }

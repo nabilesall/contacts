@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.os.Environment.DIRECTORY_PICTURES
 import android.provider.MediaStore
 import android.provider.OpenableColumns.*
-import android.util.Log
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -19,15 +18,14 @@ import androidx.core.content.FileProvider
 import com.google.android.material.snackbar.Snackbar
 import com.idrissa.tp1.custom.PopupDialog
 import com.idrissa.tp1.R
-import com.idrissa.tp1.StorageManager
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_form.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 @Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity() {
+class FormActivity : AppCompatActivity() {
 
     private lateinit var genreSelected : String
     private lateinit var nom : String
@@ -51,21 +49,23 @@ class MainActivity : AppCompatActivity() {
     private var indexContact : String = ""
 
 
-    //fun setLinkImage(link : String){this.linkImage = link}
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    @SuppressLint("ResourceType", "QueryPermissionsNeeded", "SimpleDateFormat")
+    @SuppressLint("ResourceType", "QueryPermissionsNeeded", "SimpleDateFormat", "IntentReset")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_form)
 
         /*
         *Pour les modif et ajout de nouveaux contacts
         */
         this.actionAFaire = intent?.extras?.getString("action").toString()
+
         if (actionAFaire == "add"){
             val firstname = intent?.extras?.getString("firstName").toString()
             inputPrenom.setText(firstname)
         }
+
         else if(actionAFaire == "update"){
             val results  = intent?.extras
             val linkImg = results?.getString("img").toString()
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
             dp.show()
         }
 
-        //bouton de validation
+        //validation button
         validate_btn.setOnClickListener {
 
             val selectedId = groupeGenre.checkedRadioButtonId
@@ -175,17 +175,20 @@ class MainActivity : AppCompatActivity() {
                                     "Ajouter aux favoris: "+ if(this.etatCB)  "Oui" else "Non" + "\n"+
                                     "link Image : "
 
+            // save or cancel ?
             val popupDialog = PopupDialog(this)
             popupDialog.setTitrePopupDialog(getString(R.string.titrepopup))
             popupDialog.setMessagePopupDialog(message)
             popupDialog.setTextLeftButtonPopup("Annuler")
             popupDialog.setTextRightButtonPopup("Valider")
 
+            // Cancel button
             popupDialog.getLeftButtonPopup().setOnClickListener{
                 popupDialog.dismiss()
                 Toast.makeText(this, " Annulé", Toast.LENGTH_SHORT).show()
             }
 
+            // Validation
             popupDialog.getRightButtonPopup().setOnClickListener{
                 val intentMainAct = Intent(this, FirstActivity::class.java)
 
@@ -205,14 +208,7 @@ class MainActivity : AppCompatActivity() {
 
                 setResult(Activity.RESULT_OK, intentMainAct)
 
-                groupeGenre.check(homme_btn.id)
-                imgDeCouverture.setImageResource(R.drawable.homme)
-                inputNom.setText("")
-                inputPrenom.setText("")
-                inputBirth.setText("")
-                inputTelephone.setText("")
-                inputMail.setText("")
-                cb_fav.isChecked = false
+                resetData()
                 popupDialog.dismiss()
                 finish()
             }
@@ -221,6 +217,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         imgDeCouverture.setOnClickListener{
+            // App photo or gallery ?
             val popupDialog = PopupDialog(this)
             popupDialog.setTitrePopupDialog(getString(R.string.titrepopup))
             popupDialog.setMessagePopupDialog(getString(R.string.msgImgDeCouv))
@@ -278,16 +275,11 @@ class MainActivity : AppCompatActivity() {
                 popupDialogPermGallery.getRightButtonPopup().setOnClickListener{
                     // PICK INTENT picks item from data
                     // and returned selected item
-                    //val galleryIntent = Intent(Intent.ACTION_PICK)
-                    // here item is type of image
-                    //ActivityResultLauncher callback
-                    //imagePickerActivityResult.launch(galleryIntent)
-                    //loadedImg.launch("image/*")
+                    val galleryIntent = Intent(Intent.ACTION_PICK)
 
-                    val galleryIntent = Intent(MediaStore.ACTION_PICK_IMAGES)
+                    //val galleryIntent = Intent(MediaStore.ACTION_PICK_IMAGES)
                     galleryIntent.type = "image/*"
                     startActivityForResult(galleryIntent,gallerycode)
-
 
                     popupDialogPermGallery.dismiss()
                     popupDialog.dismiss()
@@ -317,6 +309,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun resetData() {
+        groupeGenre.check(homme_btn.id)
+        imgDeCouverture.setImageResource(R.drawable.homme)
+        inputNom.setText("")
+        inputPrenom.setText("")
+        inputBirth.setText("")
+        inputTelephone.setText("")
+        inputMail.setText("")
+        cb_fav.isChecked = false
+    }
+
     private fun getFile(nomFichier: String): File {
         val strgDirec = getExternalFilesDir(DIRECTORY_PICTURES)
         return  File.createTempFile(nomFichier,".jpg",strgDirec)
@@ -331,12 +334,8 @@ class MainActivity : AppCompatActivity() {
                     val fileUriGall = data!!.data
                     if (fileUriGall != null) this.linkImage = fileUriGall
                     imgDeCouverture.setImageURI(fileUriGall)
-                    //this.linkImage = StorageManager().urlImage
-
-                    //data.data?.let { stm.telechargerImage(it)}
 
                     this.imageUploaded = true
-
                 }
 
                 cameracode ->{

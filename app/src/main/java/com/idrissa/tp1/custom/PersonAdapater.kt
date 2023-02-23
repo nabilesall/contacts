@@ -17,11 +17,9 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat.startActivity
-import androidx.core.net.toUri
 import com.idrissa.tp1.Person
 import com.idrissa.tp1.R
 import com.idrissa.tp1.activities.*
-import kotlin.math.log
 
 
 class PersonAdapater(activity: FirstActivity, context : Context, listeContact : List<Person>, val onRemoved: (Person) -> Unit) : BaseAdapter() {
@@ -63,15 +61,15 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
         val telephone = personneCourrante.getTelephne()
         val mail = personneCourrante.getMail()
         val fav = personneCourrante.isFavoris()
-        val linkimage = personneCourrante.getLinkImage()
+        val linkimage = personneCourrante.getLinkImageUri()
 
         view.findViewById<TextView>(R.id.nom_contact).text = "$prenom $nom"
         view.findViewById<TextView>(R.id.telephone_contact).text = telephone
         //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage.toUri())
-        if(linkimage != "null"){
+        if(linkimage.toString() != "null"){
             //Log.e("uri",linkimage)
             try {
-                //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage.toUri())
+                view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage)
             }catch (ex : java.lang.Exception){
                 ex.printStackTrace()
                 Log.e("erreur","$ex")
@@ -97,7 +95,7 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
         }
 
         view.findViewById<Button>(R.id.modifier_contact).setOnClickListener {
-            val modifIntent = Intent(context, MainActivity::class.java)
+            val modifIntent = Intent(context, FormActivity::class.java)
                 .putExtra("action","update")
                 .putExtra("img",linkimage)
                 .putExtra("lastName",nom)
@@ -112,7 +110,7 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
         }
 
         view.setOnClickListener{
-            makeText(context, linkimage, Toast.LENGTH_SHORT).show()
+            makeText(context, linkimage.toString(), Toast.LENGTH_SHORT).show()
         }
 
         view.setOnLongClickListener {
