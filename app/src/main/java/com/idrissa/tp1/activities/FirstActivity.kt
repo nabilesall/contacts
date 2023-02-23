@@ -5,6 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -205,6 +207,9 @@ class FirstActivity : AppCompatActivity() {
         textView.text = "$nb Contacts"
     }
 
+    fun setImage(view : View,uri: Uri){
+        view.findViewById<ImageView>(R.id.photo_contact).setImageURI(uri)
+    }
     override fun onStop() {
         super.onStop()
         this.saveData()

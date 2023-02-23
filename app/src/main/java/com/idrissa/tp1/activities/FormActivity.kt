@@ -309,6 +309,9 @@ class FormActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * reset the data in the form
+     */
     private fun resetData() {
         groupeGenre.check(homme_btn.id)
         imgDeCouverture.setImageResource(R.drawable.homme)
@@ -320,11 +323,18 @@ class FormActivity : AppCompatActivity() {
         cb_fav.isChecked = false
     }
 
+    /**
+     * git the file
+     */
     private fun getFile(nomFichier: String): File {
         val strgDirec = getExternalFilesDir(DIRECTORY_PICTURES)
         return  File.createTempFile(nomFichier,".jpg",strgDirec)
     }
 
+    /**
+     * this function reprsente the activity result.
+     * it restotres the data from the FirstActivity
+     */
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == Activity.RESULT_OK){
@@ -363,6 +373,9 @@ class FormActivity : AppCompatActivity() {
         }
     }
 
+    /***
+     * check a correct email format
+     */
     private fun isEmailValid(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }

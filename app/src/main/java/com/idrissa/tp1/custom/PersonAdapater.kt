@@ -1,7 +1,6 @@
 package com.idrissa.tp1.custom
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -22,20 +21,12 @@ import com.idrissa.tp1.R
 import com.idrissa.tp1.activities.*
 
 
-class PersonAdapater(activity: FirstActivity, context : Context, listeContact : List<Person>, val onRemoved: (Person) -> Unit) : BaseAdapter() {
+class PersonAdapater(private val activity: FirstActivity,
+                     private val context : Context,
+                     private var listeContact : List<Person>,
+                     private val onRemoved: (Person) -> Unit) : BaseAdapter() {
 
-    private var activity : Activity
-    private var context : Context
-    private var listeContact : List<Person>
-    private var inflater: LayoutInflater
-
-    init {
-        this.activity = activity
-        this.context = context
-        this.listeContact = listeContact
-        this.inflater = LayoutInflater.from(context)
-
-    }
+    private var inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun getCount(): Int {
         return  listeContact.size
@@ -65,11 +56,12 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
 
         view.findViewById<TextView>(R.id.nom_contact).text = "$prenom $nom"
         view.findViewById<TextView>(R.id.telephone_contact).text = telephone
-        //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage.toUri())
+
         if(linkimage.toString() != "null"){
             //Log.e("uri",linkimage)
             try {
-                view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage)
+                //activity.setImage(view,linkimage)
+                //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage)
             }catch (ex : java.lang.Exception){
                 ex.printStackTrace()
                 Log.e("erreur","$ex")
@@ -81,11 +73,13 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
 
         }
 
+        // call button
         view.findViewById<Button>(R.id.appeler_contact).setOnClickListener {
             val appelIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:$telephone"))
             startActivity(activity,appelIntent,null)
         }
 
+        // message button
         view.findViewById<Button>(R.id.message_contact).setOnClickListener {
             val messageIntent = Intent(Intent.ACTION_VIEW)
             messageIntent.type = "vnd.android-dir/mms-sms"
@@ -94,6 +88,7 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
             startActivity(activity,messageIntent, null)
         }
 
+        // modify button
         view.findViewById<Button>(R.id.modifier_contact).setOnClickListener {
             val modifIntent = Intent(context, FormActivity::class.java)
                 .putExtra("action","update")
@@ -109,10 +104,12 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
             startActivityForResult(activity ,modifIntent,0,null)
         }
 
+        // contact information
         view.setOnClickListener{
             makeText(context, linkimage.toString(), Toast.LENGTH_SHORT).show()
         }
 
+        // delete contatc
         view.setOnLongClickListener {
             onRemoved.invoke(personneCourrante)
             //FirstActivity().editNumberConatcts(listeContact.size.toString(),context)
@@ -124,8 +121,13 @@ class PersonAdapater(activity: FirstActivity, context : Context, listeContact : 
         return view
     }
 
+    /**
+     * set the current with the new list given
+     * and notify the adapter
+     */
     fun setListContact(listeContact: List<Person>){
         this.listeContact = listeContact
+        activity.editNumberConatcts(count)
         notifyDataSetChanged()
     }
 }
