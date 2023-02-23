@@ -8,6 +8,7 @@ Pour le moment l'application ne dispose pas beaucoup de fonctionnalités mais vo
 D'autres versions seront faites pour amener davantage de fonctionnalités et d'améliorer l'expérience utilisateur. 
 
 ### Appel
+|  |  |
 Appeler un contact en ouvrant l'application de téléphone pour appeler le contact choisi.
 
 ### Message 
