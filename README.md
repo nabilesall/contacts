@@ -5,6 +5,8 @@ On peut ainsi recueillir des informations comme le nom et prénom, le sexe, la d
 
 ## Fonctionnalités
 Pour le moment l'application ne dispose pas beaucoup de fonctionnalités mais voici les principales. 
+D'autres versions seront faites pour amener davantage de fonctionnalités et d'améliorer l'expérience utilisateur. 
+
 ### Appel
 Appeler un contact en ouvrant l'application de téléphone pour appeler le contact choisi.
 
@@ -12,7 +14,9 @@ Appeler un contact en ouvrant l'application de téléphone pour appeler le conta
 Envoyer un message avec l'application de votre messagerie au contact cible.
 
 ### Modifier
-Permet de modifier les informations du contact.
+Permet de modifier les informations du contact.  
+Mettre une photo pour un contact ou bien la supprimer en mettant l'image par défaut.
+Mettre ou démettre un contact en favoris.
 
 ### Recherche
 Effectuer des recherches sur la liste de contacts par le prénom, le nom ou encore le numéro de téléphone. 
