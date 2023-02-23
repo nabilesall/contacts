@@ -8,19 +8,23 @@ Pour le moment l'application ne dispose pas beaucoup de fonctionnalités mais vo
 D'autres versions seront faites pour amener davantage de fonctionnalités et d'améliorer l'expérience utilisateur. 
 
 ### Appel
---------
+-----------------------------
 Appeler un contact en ouvrant l'application de téléphone pour appeler le contact choisi.
 
 ### Message 
+-----------------------------
 Envoyer un message avec l'application de votre messagerie au contact cible.
 
 ### Modifier
+-----------------------------
 Permet de modifier les informations du contact.  
 Mettre une photo pour un contact ou bien la supprimer en mettant l'image par défaut.
 Mettre ou démettre un contact en favoris.
 
 ### Recherche
+-----------------------------
 Effectuer des recherches sur la liste de contacts par le prénom, le nom ou encore le numéro de téléphone. 
 
 ### Favoris
+-----------------------------
 Mettre en favoris des contacts et pouvoir ensuite afficher les contacts favoris seulement. 
