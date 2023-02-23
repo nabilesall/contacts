@@ -9,6 +9,7 @@ D'autres versions seront faites pour amener davantage de fonctionnalités et d'a
 
 ### Appel
 |  |  |  
+| ---- | ---- |
 Appeler un contact en ouvrant l'application de téléphone pour appeler le contact choisi.
 
 ### Message 
