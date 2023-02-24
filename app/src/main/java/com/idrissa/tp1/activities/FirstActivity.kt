@@ -33,6 +33,8 @@ class FirstActivity : AppCompatActivity() {
         set(value) {
             field = value
             filterListe()
+            if (value == "") displayItems("show")
+            else displayItems("hide")
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +45,6 @@ class FirstActivity : AppCompatActivity() {
         adapater =  PersonAdapater(this@FirstActivity,applicationContext,filteredContactList) {
             listeDeContact.remove(it)
             filterListe()
-
         }
         liste_de_contact.adapter = adapater
 
@@ -86,11 +87,15 @@ class FirstActivity : AppCompatActivity() {
      * the search results or the favorite contacts
      */
     private fun filterListe(){
+        listeDeContact.sortBy {
+            it.getPrenom()
+        }
         this.filteredContactList = listeDeContact
             .filter { if(switch_favoris.isChecked){
-                it.isFavoris()
+                displayItems("hide"); it.isFavoris()
             }
-            else true }
+            else{ displayItems("show") ; true}
+            }
 
             .filter {if(search.isNotEmpty()){
                 it.getPrenom().contains(search,true) ||
@@ -184,11 +189,14 @@ class FirstActivity : AppCompatActivity() {
 
         if (listeDeContact.size == 0){
             this.listeDeContact = ArrayList()
-            editNumberConatcts(0)
+            //editNumberConatcts(0)
         }
         else{
+            listeDeContact.sortBy {
+                it.getPrenom()
+            }
             filteredContactList = listeDeContact
-            editNumberConatcts(listeDeContact.size)
+            editNumberConatcts(listeDeContact.size,"")
         }
     }
 
@@ -203,8 +211,26 @@ class FirstActivity : AppCompatActivity() {
      * display the number of registred contacts
      */
     @SuppressLint("SetTextI18n")
-    fun editNumberConatcts(nb: Any){
-        textView.text = "$nb Contacts"
+    fun editNumberConatcts(nb: Int,option : String){
+        if (option == "trouves"){
+            if(nb != 0){
+                contacts_trouves.text = "$nb contacts trouvés"
+            }else contacts_trouves.text = "Aucun contact trouvé"
+
+        }else nombreDeContacts.text = this.listeDeContact.size.toString() + " contacts"
+    }
+
+    private fun displayItems(visibilityOption : String){
+        if(visibilityOption == "show"){
+            //toForm.visibility = View.VISIBLE
+            contacts_trouves.visibility = View.GONE
+
+        }
+        else if (visibilityOption == "hide"){
+            //toForm.visibility = View.GONE
+            contacts_trouves.visibility = View.VISIBLE
+        }
+
     }
 
     fun setImage(view : View,uri: Uri){
@@ -214,6 +240,7 @@ class FirstActivity : AppCompatActivity() {
         super.onStop()
         this.saveData()
     }
+
 }
 
 

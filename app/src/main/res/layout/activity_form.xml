@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="50dp"
     android:gravity="center"
-    >
+    android:orientation="vertical"
+    android:padding="50dp">
 
-    <ImageView
-        android:id="@+id/imgDeCouverture"
+    <androidx.cardview.widget.CardView
         android:layout_width="200dp"
-        android:layout_height="250dp"
-        android:src="@drawable/homme"
-        android:contentDescription="@string/content_desc_img"
-        />
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="100dp">
+
+        <ImageView
+            android:id="@+id/imgDeCouverture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/content_desc_img"
+            android:src="@drawable/homme" />
+
+    </androidx.cardview.widget.CardView>
 
     <RadioGroup
         android:id="@+id/groupeGenre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/homme_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="@string/rb_homme"/>
+            android:text="@string/rb_homme" />
 
         <RadioButton
             android:id="@+id/femme_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rb_femme"/>
+            android:text="@string/rb_femme" />
 
         <RadioButton
             android:id="@+id/autre_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rb_autre"/>
+            android:text="@string/rb_autre" />
 
     </RadioGroup>
 
@@ -52,47 +58,42 @@
             android:id="@+id/inputNom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_nom"
-            android:inputType="text"
             android:autofillHints="last name"
-            />
+            android:hint="@string/hint_nom"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/inputPrenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_prenom"
-            android:inputType="text"
             android:autofillHints="prenom"
-            />
+            android:hint="@string/hint_prenom"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/inputBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_birth"
-            android:inputType="text"
             android:autofillHints="birthday"
             android:focusable="false"
-            />
+            android:hint="@string/hint_birth"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/inputTelephone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_numero"
-            android:inputType="phone"
             android:autofillHints="number"
-            />
+            android:hint="@string/hint_numero"
+            android:inputType="phone" />
 
         <EditText
             android:id="@+id/inputMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_mail"
-            android:inputType="textEmailAddress"
             android:autofillHints="text"
-            />
+            android:hint="@string/hint_mail"
+            android:inputType="textEmailAddress" />
     </LinearLayout>
 
     <CheckBox
@@ -100,12 +101,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"
-        android:text="@string/fav"/>
+        android:text="@string/fav" />
 
     <Button
         android:id="@+id/validate_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/submt_btn"/>
+        android:text="@string/submt_btn" />
 
 </LinearLayout>

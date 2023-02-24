@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat.startActivity
 import com.idrissa.tp1.Person
 import com.idrissa.tp1.R
 import com.idrissa.tp1.activities.*
+import kotlinx.android.synthetic.main.first_activity.view.*
 
 
 class PersonAdapater(private val activity: FirstActivity,
@@ -27,7 +28,7 @@ class PersonAdapater(private val activity: FirstActivity,
                      private val onRemoved: (Person) -> Unit) : BaseAdapter() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(context)
-
+    
     override fun getCount(): Int {
         return  listeContact.size
     }
@@ -42,7 +43,7 @@ class PersonAdapater(private val activity: FirstActivity,
 
     @SuppressLint("SetTextI18n", "ViewHolder", "InflateParams")
     override fun getView(position: Int, p1: View?, p2: ViewGroup?): View {
-        val view = this.inflater.inflate(R.layout.adapter_contact, null)
+        val view = this.inflater.inflate(R.layout.adapter_contact,null)
 
         val personneCourrante = getItem(position) as Person
         val nom = personneCourrante.getNom()
@@ -114,6 +115,7 @@ class PersonAdapater(private val activity: FirstActivity,
             onRemoved.invoke(personneCourrante)
             //FirstActivity().editNumberConatcts(listeContact.size.toString(),context)
             Log.e("size ", listeContact.size.toString())
+            activity.findViewById<TextView>(R.id.nombreDeContacts).text = this.listeContact.size.toString() + " contacts"
 
             notifyDataSetChanged()
             true
@@ -127,7 +129,7 @@ class PersonAdapater(private val activity: FirstActivity,
      */
     fun setListContact(listeContact: List<Person>){
         this.listeContact = listeContact
-        activity.editNumberConatcts(count)
+        activity.editNumberConatcts(count,"trouves")
         notifyDataSetChanged()
     }
 }

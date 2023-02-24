@@ -111,7 +111,6 @@ class FormActivity : AppCompatActivity() {
                 now.set(Calendar.YEAR,dpYear)
                 now.set(Calendar.MONTH,dpMonth)
                 now.set(Calendar.DAY_OF_MONTH,dpDay)
-                //val selectedDate : String =  DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(now.time)
 
                 val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
                 val dateTimeFormat : String = simpleDateFormat.format(now.time).toString()
@@ -135,8 +134,8 @@ class FormActivity : AppCompatActivity() {
                 val rbChoosen = findViewById<RadioButton>(selectedId)
                 this.genreSelected = rbChoosen.text as String
             }
-            this.nom = inputNom.text.toString()
-            this.prenom = inputPrenom.text.toString()
+            this.nom = inputNom.text.toString().capitalize(Locale.ROOT)
+            this.prenom = inputPrenom.text.toString().capitalize(Locale.ROOT)
             birth = inputBirth.text.toString()
             adrMail = inputMail.text.toString()
             numereTelephone = inputTelephone.text.toString()
@@ -206,7 +205,7 @@ class FormActivity : AppCompatActivity() {
                     intentMainAct.data  = linkImage
                 }
 
-                setResult(Activity.RESULT_OK, intentMainAct)
+                setResult(RESULT_OK, intentMainAct)
 
                 resetData()
                 popupDialog.dismiss()
