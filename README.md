@@ -28,3 +28,13 @@ Effectuer des recherches sur la liste de contacts par le prénom, le nom ou enco
 ### Favoris
 -----------------------------
 Mettre en favoris des contacts et pouvoir ensuite afficher les contacts favoris seulement. 
+
+### Extentions
+-----------------------------
+Faire un menu pour deux actions : Paramètre et Modifier ( pour supprimer tous les conatcts)  
+Choisir le thème : dark mode ou light mode  
+Choisir la langue : Français, Anglais, ou Arabe  
+Choisir comment afficher les noms des contacts : Nom Prénom ou Prénom Nom  
+Choisir le tri : Trier par le nom ou par le prénom  
+Séparer la liste de contacts par lettre alphabet
+Faire des photos des contacts par défaut par la première lettre du prénom
