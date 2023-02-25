@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tp3</string>
+    <string name="app_name">contacts</string>
     <string name="rb_homme">Homme</string>
     <string name="rb_femme">Femme</string>
     <string name="rb_autre">Autre</string>

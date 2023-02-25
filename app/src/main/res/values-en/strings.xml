@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">contacts</string>
+    <string name="rb_homme">Male</string>
+    <string name="rb_femme">Female</string>
+    <string name="rb_autre">Other</string>
+
+    <string name="content_desc_img">Profile picture</string>
+    <string name="fav">Add to favorites</string>
+    <string name="submt_btn">Enregistrer</string>
+    <string name="hint_prenom">First name</string>
+    <string name="hint_nom">Last name</string>
+    <string name="hint_birth">Date of Birth</string>
+    <string name="hint_numero">Phone Number</string>
+    <string name="hint_mail">Email Address</string>
+    <string name="sbNom">The last name field must not be empty!</string>
+    <string name="sbPrenom">The first name field must not be empty!</string>
+    <string name="sbMail">The Email field must not be empty!</string>
+    <string name="sbErrMail">Invalide Email Address!</string>
+
+    <string name="textButtonPrincActivity">Add a contact</string>
+    <string name="popuptitre">Tittle</string>
+    <string name="msgpopup">Message</string>
+    <string name="titrepopup">Resume</string>
+    <string name="msgImgDeCouv">How do you add a photo</string>
+    <string name="titreImgDeCouv">Add a photo</string>
+    <string name="titreAutorisation">authorization required</string>
+    <string name="nonBouton">No</string>
+    <string name="ouiBouton">Yes</string>
+    <string name="msgErrorPhoto">unable to take a picture</string>
+
+    <string name="nom_et_pr_nom">nom et prénom</string>
+    <string name="_tel">0707070707</string>
+    <string name="photo_de_profil">photo de profil</string>
+    <string name="appeler">Call</string>
+    <string name="modifier">Modify</string>
+    <string name="message">Message</string>
+    <string name="switch_favoris">Favorites</string>
+
+
+</resources>
