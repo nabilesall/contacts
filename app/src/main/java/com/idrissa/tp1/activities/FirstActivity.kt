@@ -86,7 +86,7 @@ class FirstActivity : AppCompatActivity() {
      * this function filter the base list to display
      * the search results or the favorite contacts
      */
-    private fun filterListe(){
+    fun filterListe(){
         listeDeContact.sortBy {
             it.getPrenom()
         }
@@ -239,6 +239,10 @@ class FirstActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         this.saveData()
+    }
+
+    fun getListeDeContact(): MutableList<Person> {
+        return this.listeDeContact
     }
 
 }

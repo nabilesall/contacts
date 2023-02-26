@@ -189,7 +189,17 @@ class FormActivity : AppCompatActivity() {
 
             // Validation
             popupDialog.getRightButtonPopup().setOnClickListener{
-                val intentMainAct = Intent(this, FirstActivity::class.java)
+                var intentMainAct = Intent(this, FirstActivity::class.java)
+                /*if(this.actionAFaire == "add"){
+                    intentMainAct = Intent(this, FirstActivity::class.java)
+                    Toast.makeText(this, "dans add", Toast.LENGTH_SHORT).show()
+                }
+
+                else if(this.actionAFaire == "update"){
+                    intentMainAct = Intent(this, ShowContactActivity::class.java)
+                    //Toast.makeText(this, "dans update", Toast.LENGTH_SHORT).show()
+                }*/
+
 
                 intentMainAct.putExtra("action",actionAFaire)
 

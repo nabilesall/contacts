@@ -105,9 +105,22 @@ class PersonAdapater(private val activity: FirstActivity,
             startActivityForResult(activity ,modifIntent,0,null)
         }
 
+
         // contact information
         view.setOnClickListener{
-            makeText(context, linkimage.toString(), Toast.LENGTH_SHORT).show()
+            //makeText(context, linkimage.toString(), Toast.LENGTH_SHORT).show()
+            val modifIntent = Intent(context, ShowContactActivity::class.java)
+                .putExtra("action","update")
+                .putExtra("img",linkimage)
+                .putExtra("lastName",nom)
+                .putExtra("firstName",prenom)
+                .putExtra("genre",genre)
+                .putExtra("dateNaiss",date)
+                .putExtra("num",telephone)
+                .putExtra("mail",mail)
+                .putExtra("favoris",fav)
+                .putExtra("position",position)
+            startActivityForResult(activity ,modifIntent,0,null)
         }
 
         // delete contatc
