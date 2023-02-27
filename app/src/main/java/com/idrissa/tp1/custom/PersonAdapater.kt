@@ -62,9 +62,8 @@ class PersonAdapater(private val activity: FirstActivity,
             //Log.e("uri",linkimage)
             try {
                 //activity.setImage(view,linkimage)
-                //view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage)
-            }catch (ex : java.lang.Exception){
-                ex.printStackTrace()
+                view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage)
+            }catch (ex : Exception){
                 Log.e("erreur","$ex")
             }
 

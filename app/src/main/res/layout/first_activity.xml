@@ -51,23 +51,43 @@
         tools:layout_editor_absoluteX="16dp" />
 
 
-    <ListView
-        android:id="@+id/liste_de_contact"
-        android:layout_width="386dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/listcontacview"
+        style="@style/cardview"
+        android:layout_width="match_parent"
         android:layout_height="650dp"
-        android:layout_marginTop="15dp"
-        android:padding="20dp"
+
+        android:layout_marginTop="25dp"
+        app:cardCornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barre_de_recherche"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/liste_de_contact"
+                android:layout_width="386dp"
+                android:layout_height="650dp"
+                android:layout_marginBottom="20dp"
+                android:padding="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/contacts_trouves"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/liste_de_contact"
+        app:layout_constraintBottom_toTopOf="@+id/listcontacview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

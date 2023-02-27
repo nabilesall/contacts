@@ -359,6 +359,7 @@ class FormActivity : AppCompatActivity() {
 
                 cameracode ->{
                     val fileUriCamera = Uri.fromFile(file)
+                    if (fileUriCamera != null) this.linkImage = fileUriCamera
                     /*
                     //val imageChoisie = data?.extras?.get("data") as Bitmap
                     //imgDeCouverture.setImageBitmap(imageChoisie)
