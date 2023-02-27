@@ -92,7 +92,7 @@ class PersonAdapater(private val activity: FirstActivity,
         view.findViewById<Button>(R.id.modifier_contact).setOnClickListener {
             val modifIntent = Intent(context, FormActivity::class.java)
                 .putExtra("action","update")
-                .putExtra("img",linkimage)
+                .putExtra("img",linkimage.toString())
                 .putExtra("lastName",nom)
                 .putExtra("firstName",prenom)
                 .putExtra("genre",genre)
@@ -107,10 +107,11 @@ class PersonAdapater(private val activity: FirstActivity,
 
         // contact information
         view.setOnClickListener{
+            //Log.e("link dans persone ada","$linkimage")
             //makeText(context, linkimage.toString(), Toast.LENGTH_SHORT).show()
             val modifIntent = Intent(context, ShowContactActivity::class.java)
                 .putExtra("action","update")
-                .putExtra("img",linkimage)
+                .putExtra("img",linkimage.toString())
                 .putExtra("lastName",nom)
                 .putExtra("firstName",prenom)
                 .putExtra("genre",genre)

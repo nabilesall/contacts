@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -48,6 +50,23 @@ class ShowContactActivity : AppCompatActivity() {
         this.genre = intent?.extras?.getString("genre").toString()
         this.etatCB = intent?.extras!!.getBoolean("favoris",false)
         this.index = intent?.extras?.getInt("position").toString().toInt()
+        //this.linkImage = intent?.extras?.getUri("img")
+
+        val linkImg = intent?.extras?.getString("img")
+
+        //Log.e("link dans show","$linkImg")
+        if(linkImg.toString() != "null"){
+            //Log.e("uri",linkimage)
+            try {
+                //activity.setImage(view,linkimage)
+                dc_photo.setImageURI(Uri.parse(linkImg))
+            }catch (ex : Exception){
+                Log.e("erreur","$ex")
+            }
+
+        }else{
+                dc_photo.setImageResource(this.resources.getIdentifier(genre,"drawable",this.packageName))
+        }
 
         dc_nom.text = "$prenom $nom"
         dc_telephone.text = numereTelephone

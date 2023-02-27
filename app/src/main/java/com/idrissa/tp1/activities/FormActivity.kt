@@ -10,15 +10,17 @@ import android.os.Bundle
 import android.os.Environment.DIRECTORY_PICTURES
 import android.provider.MediaStore
 import android.provider.OpenableColumns.*
+import android.util.Log
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.google.android.material.snackbar.Snackbar
-import com.idrissa.tp1.custom.PopupDialog
 import com.idrissa.tp1.R
+import com.idrissa.tp1.custom.PopupDialog
 import kotlinx.android.synthetic.main.activity_form.*
+import kotlinx.android.synthetic.main.details_contact.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -71,8 +73,15 @@ class FormActivity : AppCompatActivity() {
             val linkImg = results?.getString("img").toString()
             val genre = results?.getString("genre").toString()
 
+            Log.e("linkk dans form",linkImg)
             if(linkImg == "null"){
                 imgDeCouverture.setImageResource(this.resources.getIdentifier(genre,"drawable",this.packageName))
+            }else{
+                try {
+                    imgDeCouverture.setImageURI(Uri.parse(linkImg))
+                }catch (ex : Exception){
+                    Log.e("erreur","$ex")
+                }
             }
 
             when (genre) {
@@ -285,10 +294,20 @@ class FormActivity : AppCompatActivity() {
                     // PICK INTENT picks item from data
                     // and returned selected item
                     val galleryIntent = Intent(Intent.ACTION_PICK)
+                    /*galleryIntent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+                    galleryIntent.addFlags((Intent.FLAG_GRANT_READ_URI_PERMISSION))*/
+
+                    file = getFile(nomfichier)
+                    val fileProvider = FileProvider.getUriForFile(this,"com.idrissa.tp1",file)
+                    galleryIntent.putExtra(MediaStore.EXTRA_OUTPUT,fileProvider)
+
+                    if(galleryIntent.resolveActivity(this.packageManager) != null) {
+                        galleryIntent.type = "image/*"
+                        startActivityForResult(galleryIntent, gallerycode)
+                    }
 
                     //val galleryIntent = Intent(MediaStore.ACTION_PICK_IMAGES)
-                    galleryIntent.type = "image/*"
-                    startActivityForResult(galleryIntent,gallerycode)
+
 
                     popupDialogPermGallery.dismiss()
                     popupDialog.dismiss()
@@ -344,14 +363,23 @@ class FormActivity : AppCompatActivity() {
      * this function reprsente the activity result.
      * it restotres the data from the FirstActivity
      */
+    @SuppressLint("WrongConstant")
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == Activity.RESULT_OK){
             when(requestCode){
                 gallerycode ->{
                     //val stm = StorageManager()
-                    val fileUriGall = data!!.data
+                    //val fileUriGall = data!!.data
+                    val fileUriGall = Uri.fromFile(file)
                     if (fileUriGall != null) this.linkImage = fileUriGall
+
+                    /*val takeFlags = (intent.flags
+                            and (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                            or Intent.FLAG_GRANT_WRITE_URI_PERMISSION))
+                    contentResolver.takePersistableUriPermission(fileUriGall!!, takeFlags)*/
+
+                    Log.e("gallerycode", "$fileUriGall")
                     imgDeCouverture.setImageURI(fileUriGall)
 
                     this.imageUploaded = true
@@ -372,6 +400,9 @@ class FormActivity : AppCompatActivity() {
                     imgDeCouverture.setImageURI(uri)
                     StorageManager().TelechargerImage(this, uri)*/
 
+//file:///storage/emulated/0/Android/data/com.idrissa.tp1/files/Pictures/.jpg1379405719069866381.jpg
+
+                    Log.e("camera","$fileUriCamera")
                     imgDeCouverture.setImageURI(fileUriCamera)
                     //StorageManager().telechargerImage(fileUri)
                     this.imageUploaded = true
