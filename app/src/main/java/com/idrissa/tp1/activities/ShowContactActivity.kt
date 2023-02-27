@@ -25,8 +25,6 @@ class ShowContactActivity : AppCompatActivity() {
     private lateinit var genre : String
     private var etatCB : Boolean = false
 
-    private var index : Int = -1
-
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +37,6 @@ class ShowContactActivity : AppCompatActivity() {
         this.adrMail = intent?.extras?.getString("mail").toString()
         this.genre = intent?.extras?.getString("genre").toString()
         this.etatCB = intent?.extras!!.getBoolean("favoris",false)
-        this.index = intent?.extras?.getInt("position").toString().toInt()
 
         val linkImg = intent?.extras?.getString("img")
 
@@ -49,8 +46,7 @@ class ShowContactActivity : AppCompatActivity() {
             }catch (ex : Exception){
                 Log.e("erreur","$ex")
             }
-
-        }else{
+        } else{
             dc_photo.setImageResource(this.resources.getIdentifier(genre,"drawable",this.packageName))
         }
 
@@ -59,6 +55,12 @@ class ShowContactActivity : AppCompatActivity() {
 
         dc_date_naissance.text = birth
         dc_mail.text = adrMail
+
+        if(etatCB) {
+            msgFav.text = "Ce contact est dans vos favoris"
+        }else{
+            msgFav.text = "Ce contact n'est pas dans vos favoris"
+        }
 
         dc_appeler.setOnClickListener{
             val appelIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:$numereTelephone"))
@@ -73,5 +75,4 @@ class ShowContactActivity : AppCompatActivity() {
             ContextCompat.startActivity(this@ShowContactActivity, messageIntent, null)
         }
     }
-
 }

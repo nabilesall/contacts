@@ -12,14 +12,11 @@ import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat.startActivity
 import com.idrissa.tp1.Person
 import com.idrissa.tp1.R
 import com.idrissa.tp1.activities.*
-import kotlinx.android.synthetic.main.first_activity.view.*
 
 
 class PersonAdapater(private val activity: FirstActivity,
@@ -33,7 +30,7 @@ class PersonAdapater(private val activity: FirstActivity,
         return  listeContact.size
     }
 
-    override fun getItem(position: Int): Any {
+    override fun getItem(position: Int): Person {
         return listeContact[position]
     }
 
@@ -45,7 +42,7 @@ class PersonAdapater(private val activity: FirstActivity,
     override fun getView(position: Int, p1: View?, p2: ViewGroup?): View {
         val view = this.inflater.inflate(R.layout.adapter_contact,null)
 
-        val personneCourrante = getItem(position) as Person
+        val personneCourrante = getItem(position)
         val nom = personneCourrante.nom
         val prenom = personneCourrante.getPrenom()
         val genre = personneCourrante.getGenre()
@@ -59,9 +56,7 @@ class PersonAdapater(private val activity: FirstActivity,
         view.findViewById<TextView>(R.id.telephone_contact).text = telephone
 
         if(linkimage.toString() != "null"){
-            //Log.e("uri",linkimage)
             try {
-                //activity.setImage(view,linkimage)
                 view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage)
             }catch (ex : Exception){
                 Log.e("erreur","$ex")
@@ -88,45 +83,34 @@ class PersonAdapater(private val activity: FirstActivity,
             startActivity(activity,messageIntent, null)
         }
 
+
+        //data contact
+        val dataContactIntent = Intent(context, ShowContactActivity::class.java)
+            .putExtra("action","update")
+            .putExtra("img",linkimage.toString())
+            .putExtra("lastName",nom)
+            .putExtra("firstName",prenom)
+            .putExtra("genre",genre)
+            .putExtra("dateNaiss",date)
+            .putExtra("num",telephone)
+            .putExtra("mail",mail)
+            .putExtra("favoris",fav)
+            .putExtra("position",position)
         // modify button
         view.findViewById<Button>(R.id.modifier_contact).setOnClickListener {
-            val modifIntent = Intent(context, FormActivity::class.java)
-                .putExtra("action","update")
-                .putExtra("img",linkimage.toString())
-                .putExtra("lastName",nom)
-                .putExtra("firstName",prenom)
-                .putExtra("genre",genre)
-                .putExtra("dateNaiss",date)
-                .putExtra("num",telephone)
-                .putExtra("mail",mail)
-                .putExtra("favoris",fav)
-                .putExtra("position",position)
-            startActivityForResult(activity ,modifIntent,0,null)
+            dataContactIntent.setClass(context, FormActivity::class.java)
+            startActivityForResult(activity ,dataContactIntent,0,null)
         }
-
 
         // contact information
         view.setOnClickListener{
-            //Log.e("link dans persone ada","$linkimage")
-            //makeText(context, linkimage.toString(), Toast.LENGTH_SHORT).show()
-            val modifIntent = Intent(context, ShowContactActivity::class.java)
-                .putExtra("action","update")
-                .putExtra("img",linkimage.toString())
-                .putExtra("lastName",nom)
-                .putExtra("firstName",prenom)
-                .putExtra("genre",genre)
-                .putExtra("dateNaiss",date)
-                .putExtra("num",telephone)
-                .putExtra("mail",mail)
-                .putExtra("favoris",fav)
-                .putExtra("position",position)
-            startActivityForResult(activity ,modifIntent,0,null)
+            dataContactIntent.setClass(context, ShowContactActivity::class.java)
+            startActivityForResult(activity ,dataContactIntent,0,null)
         }
 
         // delete contatc
         view.setOnLongClickListener {
             onRemoved.invoke(personneCourrante)
-            //FirstActivity().editNumberConatcts(listeContact.size.toString(),context)
             Log.e("size ", listeContact.size.toString())
             activity.findViewById<TextView>(R.id.nombreDeContacts).text = this.listeContact.size.toString() + " contacts"
 

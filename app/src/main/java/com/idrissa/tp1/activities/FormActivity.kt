@@ -51,8 +51,6 @@ class FormActivity : AppCompatActivity() {
     private lateinit var actionAFaire : String
     private var indexContact : String = ""
 
-
-
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @SuppressLint("ResourceType", "QueryPermissionsNeeded", "SimpleDateFormat", "IntentReset")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +72,6 @@ class FormActivity : AppCompatActivity() {
             this.linkImgForUpdate = results?.getString("img").toString()
             val genre = results?.getString("genre").toString()
 
-            Log.e("linkk dans form",linkImgForUpdate)
             if(linkImgForUpdate == "null"){
                 imgDeCouverture.setImageResource(this.resources.getIdentifier(genre,"drawable",this.packageName))
             }else{
@@ -106,15 +103,12 @@ class FormActivity : AppCompatActivity() {
             this.indexContact = results.getInt("position").toString()
         }
 
-
-
         //pour le datepickerdialog
         val now : Calendar = Calendar.getInstance()
         val nowMax : Calendar = Calendar.getInstance()
         val year = now.get(Calendar.YEAR)
         val month = now.get(Calendar.MONTH)
         val day = now.get(Calendar.DAY_OF_MONTH)
-
         //DatePickerDialog
         inputBirth.setOnClickListener {
             val dp = DatePickerDialog(this, { _, dpYear, dpMonth, dpDay ->
@@ -151,7 +145,6 @@ class FormActivity : AppCompatActivity() {
             numereTelephone = inputTelephone.text.toString()
             etatCB = cb_fav.isChecked
 
-
             if(nom.isEmpty()){
                 Snackbar.make(it, R.string.sbNom,Snackbar.LENGTH_SHORT).show()
             }
@@ -181,8 +174,7 @@ class FormActivity : AppCompatActivity() {
                                     "Date de naissance: " + this.birth + "\n" +
                                     "Numéro de téléphone: "+ this.numereTelephone +"\n"+
                                     "Adresse Electronique: "+ this.adrMail + "\n"+
-                                    "Ajouter aux favoris: "+ if(this.etatCB)  "Oui" else "Non" + "\n"+
-                                    "link Image : "
+                                    "Ajouter aux favoris: "+ if(this.etatCB)  "Oui" else "Non" + "\n"
 
             // save or cancel ?
             val popupDialog = PopupDialog(this)
@@ -199,17 +191,7 @@ class FormActivity : AppCompatActivity() {
 
             // Validation
             popupDialog.getRightButtonPopup().setOnClickListener{
-                var intentMainAct = Intent(this, FirstActivity::class.java)
-                /*if(this.actionAFaire == "add"){
-                    intentMainAct = Intent(this, FirstActivity::class.java)
-                    Toast.makeText(this, "dans add", Toast.LENGTH_SHORT).show()
-                }
-
-                else if(this.actionAFaire == "update"){
-                    intentMainAct = Intent(this, ShowContactActivity::class.java)
-                    //Toast.makeText(this, "dans update", Toast.LENGTH_SHORT).show()
-                }*/
-
+                val intentMainAct = Intent(this, FirstActivity::class.java)
 
                 intentMainAct.putExtra("action",actionAFaire)
 
@@ -222,7 +204,6 @@ class FormActivity : AppCompatActivity() {
                 intentMainAct.putExtra("favoris",this.etatCB)
                 intentMainAct.putExtra("index",this.indexContact)
                 if(this.actionAFaire == "update" && this.linkImage == Uri.EMPTY){
-                    //intentMainAct.putExtra("linkImage",this.linkImgForUpdate)
                     intentMainAct.data  = Uri.parse(this.linkImgForUpdate)
                     Log.e("linkImage",this.linkImgForUpdate)
                 }
@@ -230,14 +211,8 @@ class FormActivity : AppCompatActivity() {
                     intentMainAct.data  = linkImage
                     Log.e("linkImage",linkImage.toString())
                 }
-                /*else if(linkImage != Uri.EMPTY){
-                    intentMainAct.data  = linkImage
-                    Log.e("linkImage uri",linkImage.toString())
-                //}*/
 
                 setResult(RESULT_OK, intentMainAct)
-
-                //resetData()
                 popupDialog.dismiss()
                 finish()
             }
@@ -284,7 +259,6 @@ class FormActivity : AppCompatActivity() {
                         popupDialog.dismiss()
                     }
                 }
-
                 popupDialogPermAppPhoto.build()
             }
 
@@ -316,15 +290,11 @@ class FormActivity : AppCompatActivity() {
                         galleryIntent.type = "image/*"
                         startActivityForResult(galleryIntent, gallerycode)
                     }
-
                     //val galleryIntent = Intent(MediaStore.ACTION_PICK_IMAGES)
-
-
                     popupDialogPermGallery.dismiss()
                     popupDialog.dismiss()
                 }
                 popupDialogPermGallery.build()
-
             }
             popupDialog.build()
         }
@@ -390,7 +360,6 @@ class FormActivity : AppCompatActivity() {
                             or Intent.FLAG_GRANT_WRITE_URI_PERMISSION))
                     contentResolver.takePersistableUriPermission(fileUriGall!!, takeFlags)*/
 
-                    Log.e("gallerycode", "$fileUriGall")
                     imgDeCouverture.setImageURI(fileUriGall)
 
                     this.imageUploaded = true
@@ -411,9 +380,6 @@ class FormActivity : AppCompatActivity() {
                     imgDeCouverture.setImageURI(uri)
                     StorageManager().TelechargerImage(this, uri)*/
 
-//file:///storage/emulated/0/Android/data/com.idrissa.tp1/files/Pictures/.jpg1379405719069866381.jpg
-
-                    Log.e("camera","$fileUriCamera")
                     imgDeCouverture.setImageURI(fileUriCamera)
                     //StorageManager().telechargerImage(fileUri)
                     this.imageUploaded = true

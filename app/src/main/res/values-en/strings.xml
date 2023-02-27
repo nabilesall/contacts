@@ -8,11 +8,11 @@
     <string name="content_desc_img">Profile picture</string>
     <string name="fav">Add to favorites</string>
     <string name="submt_btn">Enregistrer</string>
-    <string name="hint_prenom">First name</string>
-    <string name="hint_nom">Last name</string>
+    <string name="hint_prenom">First name *</string>
+    <string name="hint_nom">Last name *</string>
     <string name="hint_birth">Date of Birth</string>
-    <string name="hint_numero">Phone Number</string>
-    <string name="hint_mail">Email Address</string>
+    <string name="hint_numero">Phone Number *</string>
+    <string name="hint_mail">Email Address *</string>
     <string name="sbNom">The last name field must not be empty!</string>
     <string name="sbPrenom">The first name field must not be empty!</string>
     <string name="sbMail">The Email field must not be empty!</string>

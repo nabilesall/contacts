@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -86,7 +85,7 @@ class FirstActivity : AppCompatActivity() {
      * this function filter the base list to display
      * the search results or the favorite contacts
      */
-    fun filterListe(){
+    private fun filterListe(){
         listeDeContact.sortBy {
             it.getPrenom()
         }
@@ -147,9 +146,7 @@ class FirstActivity : AppCompatActivity() {
                 currPerson.setFavoris(fav.toString().toBoolean())
                 currPerson.setLinkImage(imageuri.toString())
             }
-
             filterListe()
-
             Toast.makeText(this, "Enregistré", Toast.LENGTH_SHORT).show()
         }
     }
@@ -180,7 +177,6 @@ class FirstActivity : AppCompatActivity() {
         val json : String? = sp.getString("liste_contact",null)
         val type : Type = object : TypeToken<ArrayList<Person>>(){
         }.type
-
 
         if(json != null){
             this.listeDeContact = gson.fromJson(json,type)
@@ -216,35 +212,36 @@ class FirstActivity : AppCompatActivity() {
             if(nb != 0){
                 contacts_trouves.text = "$nb contacts trouvés"
             }else contacts_trouves.text = "Aucun contact trouvé"
-
         }else nombreDeContacts.text = this.listeDeContact.size.toString() + " contacts"
     }
 
+    /**
+     * display or hide the items
+     */
     private fun displayItems(visibilityOption : String){
         if(visibilityOption == "show"){
-            //toForm.visibility = View.VISIBLE
             contacts_trouves.visibility = View.GONE
-
         }
         else if (visibilityOption == "hide"){
-            //toForm.visibility = View.GONE
             contacts_trouves.visibility = View.VISIBLE
         }
-
     }
 
-    fun setImage(view : View,uri: Uri){
-        view.findViewById<ImageView>(R.id.photo_contact).setImageURI(uri)
-    }
+    /**
+     * this function is called when the activity is stopped
+     */
     override fun onStop() {
         super.onStop()
         this.saveData()
     }
 
-    fun getListeDeContact(): MutableList<Person> {
-        return this.listeDeContact
+    /**
+     * this function is called when the activity is resumed
+     */
+    override fun onResume() {
+        super.onResume()
+        filterListe()
     }
-
 }
 
 
