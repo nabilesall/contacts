@@ -3,16 +3,16 @@ package com.idrissa.tp1
 import android.net.Uri
 
 class Person(
-    nom :String,
+    var nom :String,
     prenom : String,
     genre : String,
     dateNaiss: String,
     telephone : String,
     mail : String,
     favoris : Boolean,
-    linkImage : String) {
+    linkImage : String) : java.io.Serializable {
 
-    private var nom : String
+    //private var nom : String
     private var prenom : String
     private var genre : String ="femme"
     private var dateNaiss : String
@@ -22,7 +22,7 @@ class Person(
     private var linkImage : String = "empty"
 
     init {
-        this.nom = nom
+        //this.nom = nom
         this.prenom = prenom
         this.genre = genre
         this.dateNaiss = dateNaiss
@@ -32,7 +32,7 @@ class Person(
         this.linkImage = linkImage
 
     }
-    fun getNom() : String{ return this.nom }
+    //fun getNom() : String{ return this.nom }
     fun getPrenom() : String { return this.prenom }
     fun getGenre() : String {
         if (this.genre == null || this.genre == "Autre") return "femme"
@@ -48,7 +48,7 @@ class Person(
 
     fun getLinkImageUri() : Uri{ return Uri.parse(this.linkImage) }
 
-    fun setNom(nom: String) { this.nom = nom }
+    //fun setNom(nom: String) { this.nom = nom }
     fun setPrenom(prenom: String) { this.prenom = prenom }
     fun setGenre(genre: String) { this.genre = genre}
     fun setDateNaiss(dateNaiss: String) {this.dateNaiss = dateNaiss }

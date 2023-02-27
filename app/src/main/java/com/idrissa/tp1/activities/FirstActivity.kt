@@ -99,7 +99,7 @@ class FirstActivity : AppCompatActivity() {
 
             .filter {if(search.isNotEmpty()){
                 it.getPrenom().contains(search,true) ||
-                        it.getNom().contains(search,true) ||
+                        it.nom.contains(search,true) ||
                         it.getTelephne().contains(search,true)
             }
             else true }
@@ -138,7 +138,7 @@ class FirstActivity : AppCompatActivity() {
                 val pos= data.getStringExtra("index").toString()
 
                 val currPerson = this.listeDeContact[pos.toInt()]
-                currPerson.setNom(nom)
+                currPerson.nom = nom
                 currPerson.setPrenom(prenom)
                 currPerson.setGenre(genre)
                 currPerson.setDateNaiss(datenaiss)

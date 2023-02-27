@@ -46,7 +46,7 @@ class PersonAdapater(private val activity: FirstActivity,
         val view = this.inflater.inflate(R.layout.adapter_contact,null)
 
         val personneCourrante = getItem(position) as Person
-        val nom = personneCourrante.getNom()
+        val nom = personneCourrante.nom
         val prenom = personneCourrante.getPrenom()
         val genre = personneCourrante.getGenre()
         val date = personneCourrante.getDateNaiss()

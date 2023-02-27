@@ -94,11 +94,11 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        style="@style/cardview"
         android:id="@+id/cv_telephone"
+        style="@style/cardview"
         android:layout_width="350dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="-45dp"
         app:cardCornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="75dp"
                 android:text="prénom nom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +157,7 @@
                 android:layout_marginTop="10dp"
                 android:text="0707070707"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.45"
+                app:layout_constraintHorizontal_bias="0.442"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dc_nom" />
 
@@ -177,9 +177,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_photo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="70dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="100dp"
         app:cardCornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

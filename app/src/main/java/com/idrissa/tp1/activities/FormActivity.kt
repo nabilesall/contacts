@@ -29,6 +29,7 @@ import java.util.*
 @Suppress("DEPRECATION")
 class FormActivity : AppCompatActivity() {
 
+    private var linkImgForUpdate: String = ""
     private lateinit var genreSelected : String
     private lateinit var nom : String
     private lateinit var prenom : String
@@ -70,15 +71,15 @@ class FormActivity : AppCompatActivity() {
 
         else if(actionAFaire == "update"){
             val results  = intent?.extras
-            val linkImg = results?.getString("img").toString()
+            this.linkImgForUpdate = results?.getString("img").toString()
             val genre = results?.getString("genre").toString()
 
-            Log.e("linkk dans form",linkImg)
-            if(linkImg == "null"){
+            Log.e("linkk dans form",linkImgForUpdate)
+            if(linkImgForUpdate == "null"){
                 imgDeCouverture.setImageResource(this.resources.getIdentifier(genre,"drawable",this.packageName))
             }else{
                 try {
-                    imgDeCouverture.setImageURI(Uri.parse(linkImg))
+                    imgDeCouverture.setImageURI(Uri.parse(linkImgForUpdate))
                 }catch (ex : Exception){
                     Log.e("erreur","$ex")
                 }
@@ -220,13 +221,23 @@ class FormActivity : AppCompatActivity() {
                 intentMainAct.putExtra("mail",this.adrMail)
                 intentMainAct.putExtra("favoris",this.etatCB)
                 intentMainAct.putExtra("index",this.indexContact)
-                if(linkImage != Uri.EMPTY){
-                    intentMainAct.data  = linkImage
+                if(this.actionAFaire == "update" && this.linkImage == Uri.EMPTY){
+                    //intentMainAct.putExtra("linkImage",this.linkImgForUpdate)
+                    intentMainAct.data  = Uri.parse(this.linkImgForUpdate)
+                    Log.e("linkImage",this.linkImgForUpdate)
                 }
+                else if(linkImage != Uri.EMPTY){
+                    intentMainAct.data  = linkImage
+                    Log.e("linkImage",linkImage.toString())
+                }
+                /*else if(linkImage != Uri.EMPTY){
+                    intentMainAct.data  = linkImage
+                    Log.e("linkImage uri",linkImage.toString())
+                //}*/
 
                 setResult(RESULT_OK, intentMainAct)
 
-                resetData()
+                //resetData()
                 popupDialog.dismiss()
                 finish()
             }
