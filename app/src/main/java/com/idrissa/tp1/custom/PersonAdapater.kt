@@ -44,13 +44,13 @@ class PersonAdapater(private val activity: FirstActivity,
 
         val personneCourrante = getItem(position)
         val nom = personneCourrante.nom
-        val prenom = personneCourrante.getPrenom()
-        val genre = personneCourrante.getGenre()
-        val date = personneCourrante.getDateNaiss()
-        val telephone = personneCourrante.getTelephne()
-        val mail = personneCourrante.getMail()
-        val fav = personneCourrante.isFavoris()
-        val linkimage = personneCourrante.getLinkImageUri()
+        val prenom = personneCourrante.prenom
+        val genre = personneCourrante.genre.lowercase()
+        val date = personneCourrante.dateNaiss
+        val telephone = personneCourrante.telephone
+        val mail = personneCourrante.mail
+        val fav = personneCourrante.favoris
+        val linkimage = Uri.parse(personneCourrante.linkImage)
 
         view.findViewById<TextView>(R.id.nom_contact).text = "$prenom $nom"
         view.findViewById<TextView>(R.id.telephone_contact).text = telephone
@@ -82,7 +82,6 @@ class PersonAdapater(private val activity: FirstActivity,
             messageIntent.putExtra("sms_body", "Héhé efface ça et mets ton message")
             startActivity(activity,messageIntent, null)
         }
-
 
         //data contact
         val dataContactIntent = Intent(context, ShowContactActivity::class.java)

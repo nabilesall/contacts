@@ -87,19 +87,19 @@ class FirstActivity : AppCompatActivity() {
      */
     private fun filterListe(){
         listeDeContact.sortBy {
-            it.getPrenom()
+            it.prenom
         }
         this.filteredContactList = listeDeContact
             .filter { if(switch_favoris.isChecked){
-                displayItems("hide"); it.isFavoris()
+                displayItems("hide"); it.favoris
             }
             else{ displayItems("show") ; true}
             }
 
             .filter {if(search.isNotEmpty()){
-                it.getPrenom().contains(search,true) ||
+                it.prenom.contains(search,true) ||
                         it.nom.contains(search,true) ||
-                        it.getTelephne().contains(search,true)
+                        it.telephone.contains(search,true)
             }
             else true }
 
@@ -138,13 +138,13 @@ class FirstActivity : AppCompatActivity() {
 
                 val currPerson = this.listeDeContact[pos.toInt()]
                 currPerson.nom = nom
-                currPerson.setPrenom(prenom)
-                currPerson.setGenre(genre)
-                currPerson.setDateNaiss(datenaiss)
-                currPerson.setTelephone(telephone)
-                currPerson.setMail(mail)
-                currPerson.setFavoris(fav.toString().toBoolean())
-                currPerson.setLinkImage(imageuri.toString())
+                currPerson.prenom = prenom
+                currPerson.genre = genre
+                currPerson.dateNaiss = datenaiss
+                currPerson.telephone = telephone
+                currPerson.mail = mail
+                currPerson.favoris = fav.toString().toBoolean()
+                currPerson.linkImage = imageuri.toString()
             }
             filterListe()
             Toast.makeText(this, "Enregistré", Toast.LENGTH_SHORT).show()
@@ -189,7 +189,7 @@ class FirstActivity : AppCompatActivity() {
         }
         else{
             listeDeContact.sortBy {
-                it.getPrenom()
+                it.prenom
             }
             filteredContactList = listeDeContact
             editNumberConatcts(listeDeContact.size,"")
