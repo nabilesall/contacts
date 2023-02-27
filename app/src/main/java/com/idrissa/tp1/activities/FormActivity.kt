@@ -283,7 +283,7 @@ class FormActivity : AppCompatActivity() {
                     galleryIntent.addFlags((Intent.FLAG_GRANT_READ_URI_PERMISSION))*/
 
                     file = getFile(nomfichier)
-                    val fileProvider = FileProvider.getUriForFile(this,"com.idrissa.tp1",file)
+                    val fileProvider = FileProvider.getUriForFile(this,"com.idrissa.tp1", file)
                     galleryIntent.putExtra(MediaStore.EXTRA_OUTPUT,fileProvider)
 
                     if(galleryIntent.resolveActivity(this.packageManager) != null) {
@@ -351,7 +351,7 @@ class FormActivity : AppCompatActivity() {
             when(requestCode){
                 gallerycode ->{
                     //val stm = StorageManager()
-                    //val fileUriGall = data!!.data
+                    val fileUriGall2 = data!!.data
                     val fileUriGall = Uri.fromFile(file)
                     if (fileUriGall != null) this.linkImage = fileUriGall
 
@@ -360,7 +360,7 @@ class FormActivity : AppCompatActivity() {
                             or Intent.FLAG_GRANT_WRITE_URI_PERMISSION))
                     contentResolver.takePersistableUriPermission(fileUriGall!!, takeFlags)*/
 
-                    imgDeCouverture.setImageURI(fileUriGall)
+                    imgDeCouverture.setImageURI(fileUriGall2)
 
                     this.imageUploaded = true
                 }

@@ -3,7 +3,9 @@ package com.idrissa.tp1.custom
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +59,8 @@ class PersonAdapater(private val activity: FirstActivity,
 
         if(linkimage.toString() != "null"){
             try {
-                view.findViewById<ImageView>(R.id.photo_contact).setImageURI(linkimage)
+                Log.e("linkimage","$linkimage")
+                view.findViewById<ImageView>(R.id.photo_contact).setImageURI(Uri.parse(linkimage.toString()))
             }catch (ex : Exception){
                 Log.e("erreur","$ex")
             }
@@ -117,6 +120,21 @@ class PersonAdapater(private val activity: FirstActivity,
             true
         }
         return view
+    }
+
+    private fun getPathFromURI(context: Context, linkimage: Uri): String? {
+        var mediaCursor: Cursor? = null
+        return try {
+            val dataPath = arrayOf(MediaStore.Images.Media.DATA)
+            mediaCursor = context.contentResolver.query(linkimage, dataPath, null, null, null)
+            val column_index: Int = mediaCursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            mediaCursor.moveToFirst()
+            mediaCursor.getString(column_index)
+        } finally {
+            if (mediaCursor != null) {
+                mediaCursor.close()
+            }
+        }
     }
 
     /**

@@ -1,9 +1,11 @@
 package com.idrissa.tp1.activities
 
 import android.annotation.SuppressLint
+import android.content.ContentUris
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
@@ -13,6 +15,8 @@ import androidx.core.content.ContextCompat
 import com.idrissa.tp1.Person
 import com.idrissa.tp1.R
 import kotlinx.android.synthetic.main.details_contact.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Suppress("DEPRECATION")
 class ShowContactActivity : AppCompatActivity() {
@@ -25,7 +29,7 @@ class ShowContactActivity : AppCompatActivity() {
     private lateinit var genre : String
     private var etatCB : Boolean = false
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details_contact)
@@ -73,6 +77,45 @@ class ShowContactActivity : AppCompatActivity() {
             messageIntent.putExtra("address", numereTelephone)
             messageIntent.putExtra("sms_body", "Héhé efface ça et mets ton message")
             ContextCompat.startActivity(this@ShowContactActivity, messageIntent, null)
+        }
+
+        dc_send_mail.setOnClickListener{
+            val mailIntent = Intent(Intent.ACTION_SENDTO)
+
+            mailIntent.data = Uri.parse("mailto:")
+            mailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(adrMail))
+            mailIntent.putExtra(Intent.EXTRA_SUBJECT, "Objet du mail")
+            mailIntent.putExtra(Intent.EXTRA_TEXT, "Héhé efface ça et mets ton message")
+
+            startActivity(mailIntent)
+        }
+
+        dc_calendrier.setOnClickListener{
+            val CALENDAR_EVENT_TIME = getMillisFromDate(birth)
+
+            val builder = CalendarContract.CONTENT_URI.buildUpon().appendPath("time")
+            ContentUris.appendId(builder, CALENDAR_EVENT_TIME)
+            val uri = builder.build()
+
+            val intent = Intent(Intent.ACTION_VIEW)
+                .setData(uri)
+            startActivity(intent)
+        }
+    }
+
+    /**
+     * Convert dateFormat to milliseconds
+     */
+    @SuppressLint("SimpleDateFormat")
+    private fun getMillisFromDate(date: String): Long {
+        return try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy")
+            val mDate = sdf.parse(date)
+            val timeInMilliseconds = mDate!!.time
+            timeInMilliseconds
+        } catch (e: Exception) {
+            e.printStackTrace()
+            0
         }
     }
 }
