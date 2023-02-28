@@ -210,8 +210,8 @@ class FirstActivity : AppCompatActivity() {
     fun editNumberConatcts(nb: Int,option : String){
         if (option == "trouves"){
             if(nb != 0){
-                contacts_trouves.text = "$nb contacts trouvés"
-            }else contacts_trouves.text = "Aucun contact trouvé"
+                contacts_trouves.text = "$nb " + getString(R.string.contacts_trouves)
+            }else contacts_trouves.text = getString(R.string.zero_contacts_trouves)
         }else nombreDeContacts.text = this.listeDeContact.size.toString() + " contacts"
     }
 

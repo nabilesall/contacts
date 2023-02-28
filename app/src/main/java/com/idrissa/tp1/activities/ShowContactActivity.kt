@@ -61,9 +61,9 @@ class ShowContactActivity : AppCompatActivity() {
         dc_mail.text = adrMail
 
         if(etatCB) {
-            msgFav.text = R.string.estDansFavoris.toString()
+            msgFav.text = getString(R.string.estDansFavoris)
         }else{
-            msgFav.text = R.string.estPasDansFavoris.toString()
+            msgFav.text = getString(R.string.estPasDansFavoris)
         }
 
         dc_appeler.setOnClickListener{

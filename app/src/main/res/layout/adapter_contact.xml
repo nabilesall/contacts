@@ -51,40 +51,19 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="@dimen/width_btn"
                 android:layout_height="@dimen/height_btn"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="2dp"
                 android:text="@string/appeler"
                 android:textColor="@color/teal_700"
                 android:textSize="@dimen/text_size_btn"
-                tools:ignore="SmallSp"
-                />
+                tools:ignore="SmallSp" />
 
-            <!--
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/appeler_contac"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:visibility="invisible"
-                app:fabSize="mini"
-                app:srcCompat="@drawable/twotone_message_24" />
-
-            <!
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/message_contact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                app:fabSize="mini"
-                app:srcCompat="@drawable/twotone_message_24"
-                android:contentDescription="gg" /> -->
 
             <Button
                 android:id="@+id/message_contact"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="@dimen/width_btn"
                 android:layout_height="@dimen/height_btn"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="2dp"
                 android:text="@string/message"
                 android:textColor="@color/teal_700"
                 android:textSize="@dimen/text_size_btn"

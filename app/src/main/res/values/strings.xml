@@ -53,5 +53,7 @@
     <string name="msgNum">"Numéro de téléphone: "</string>
     <string name="msgMail">"Adresse Electronique: "</string>
     <string name="msgFav">"Ajouter aux favoris: "</string>
+    <string name="contacts_trouves">contacts trouvés</string>
+    <string name="zero_contacts_trouves">Aucun contact trouvé</string>
 
 </resources>

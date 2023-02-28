@@ -57,4 +57,6 @@
     <string name="msgMail">"Email address: "</string>
     <string name="msgFav">"Add to favorites: "</string>
 
+    <string name="contacts_trouves">contacts found</string>
+    <string name="zero_contacts_trouves">No contact found</string>
 </resources>
