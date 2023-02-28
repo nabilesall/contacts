@@ -16,6 +16,7 @@
     <string name="sbPrenom">Le champ prénom ne doit pas être vide !</string>
     <string name="sbMail">Le champ addresse électronique ne doit pas être vide !</string>
     <string name="sbErrMail">Invalide addresse électronique!</string>
+    <string name="sbErrTel">Format numéro de téléphone invalide.</string>
 
     <string name="textButtonPrincActivity">Ajouter un contact</string>
     <string name="popuptitre">Titre</string>
@@ -28,12 +29,29 @@
     <string name="ouiBouton">Oui</string>
     <string name="msgErrorPhoto">Impossible de prendre une photo</string>
     <string name="nom_et_pr_nom">nom et prénom</string>
-    <string name="_tel">0707070707</string>
+    <string name="_tel" translatable="false">0707070707</string>
     <string name="photo_de_profil">photo de profil</string>
     <string name="appeler">Appeler</string>
     <string name="modifier">Modifier</string>
     <string name="message">Message</string>
     <string name="switch_favoris">Favoris</string>
+    <string name="recherche">Recherche</string>
+    <string name="email" translatable="false">E-mail</string>
 
+    <string name="valider">Valider</string>
+    <string name="annuler">Annuler</string>
+    <string name="annulee">Annulé</string>
+
+    <string name="msgAutorisationAppPhoto">Autoriser contacts à accéder à votre caméra</string>
+    <string name="appPhoto">App. photo</string>
+    <string name="galerie">Galerie</string>
+    <string name="estDansFavoris">Ce contact est dans vos favoris</string>
+    <string name="estPasDansFavoris">Ce contact n\'est pas dans vos favoris</string>
+    <string name="msgNom">"Nom et prénom: "</string>
+    <string name="msgGenre">"Genre: "</string>
+    <string name="msgBirth">"Date de naissance: "</string>
+    <string name="msgNum">"Numéro de téléphone: "</string>
+    <string name="msgMail">"Adresse Electronique: "</string>
+    <string name="msgFav">"Ajouter aux favoris: "</string>
 
 </resources>

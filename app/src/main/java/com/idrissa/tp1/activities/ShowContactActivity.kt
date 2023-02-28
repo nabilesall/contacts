@@ -61,9 +61,9 @@ class ShowContactActivity : AppCompatActivity() {
         dc_mail.text = adrMail
 
         if(etatCB) {
-            msgFav.text = "Ce contact est dans vos favoris"
+            msgFav.text = R.string.estDansFavoris.toString()
         }else{
-            msgFav.text = "Ce contact n'est pas dans vos favoris"
+            msgFav.text = R.string.estPasDansFavoris.toString()
         }
 
         dc_appeler.setOnClickListener{

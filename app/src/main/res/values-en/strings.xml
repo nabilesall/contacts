@@ -7,7 +7,7 @@
 
     <string name="content_desc_img">Profile picture</string>
     <string name="fav">Add to favorites</string>
-    <string name="submt_btn">Enregistrer</string>
+    <string name="submt_btn">Save contact</string>
     <string name="hint_prenom">First name *</string>
     <string name="hint_nom">Last name *</string>
     <string name="hint_birth">Date of Birth</string>
@@ -17,6 +17,7 @@
     <string name="sbPrenom">The first name field must not be empty!</string>
     <string name="sbMail">The Email field must not be empty!</string>
     <string name="sbErrMail">Invalide Email Address!</string>
+    <string name="sbErrTel">Invalid phone number format.</string>
 
     <string name="textButtonPrincActivity">Add a contact</string>
     <string name="popuptitre">Tittle</string>
@@ -30,12 +31,30 @@
     <string name="msgErrorPhoto">unable to take a picture</string>
 
     <string name="nom_et_pr_nom">nom et prénom</string>
-    <string name="_tel">0707070707</string>
     <string name="photo_de_profil">photo de profil</string>
     <string name="appeler">Call</string>
     <string name="modifier">Modify</string>
     <string name="message">Message</string>
+
+    <string name="recherche">Search</string>
     <string name="switch_favoris">Favorites</string>
 
+    <string name="valider">Validate</string>
+    <string name="annuler">Cancel</string>
+    <string name="annulee">Canceled</string>
+
+    <string name="msgAutorisationAppPhoto">Allow contacts to access your camera</string>
+    <string name="appPhoto">App. photo</string>
+    <string name="galerie">Gallery</string>
+
+    <string name="estDansFavoris">This contact is in your favorites</string>
+    <string name="estPasDansFavoris">This contact is not in your favorites</string>
+
+    <string name="msgNom">"Last name and First name "</string>
+    <string name="msgGenre">"Gender "</string>
+    <string name="msgBirth">"Date of birth: "</string>
+    <string name="msgNum">"Phone number: "</string>
+    <string name="msgMail">"Email address: "</string>
+    <string name="msgFav">"Add to favorites: "</string>
 
 </resources>

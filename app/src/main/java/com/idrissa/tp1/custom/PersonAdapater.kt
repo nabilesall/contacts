@@ -40,7 +40,7 @@ class PersonAdapater(private val activity: FirstActivity,
         return 0
     }
 
-    @SuppressLint("SetTextI18n", "ViewHolder", "InflateParams")
+    @SuppressLint("SetTextI18n", "ViewHolder", "InflateParams", "ClickableViewAccessibility")
     override fun getView(position: Int, p1: View?, p2: ViewGroup?): View {
         val view = this.inflater.inflate(R.layout.adapter_contact,null)
 
@@ -119,7 +119,15 @@ class PersonAdapater(private val activity: FirstActivity,
             notifyDataSetChanged()
             true
         }
+
         return view
+    }
+
+    private fun swipeToCall(view: View?, position: Int) {
+        val personneCourrante = getItem(position)
+        val telephone = personneCourrante.telephone
+        val appelIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:$telephone"))
+        startActivity(activity,appelIntent,null)
     }
 
     private fun getPathFromURI(context: Context, linkimage: Uri): String? {

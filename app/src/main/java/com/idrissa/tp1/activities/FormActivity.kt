@@ -158,7 +158,7 @@ class FormActivity : AppCompatActivity() {
             }
 
             else if(numereTelephone.length <5 || numereTelephone.length >14){
-                Snackbar.make(it,"Format numéro de téléphone invalide.",Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(it,R.string.sbErrTel,Snackbar.LENGTH_SHORT).show()
             }
 
             else if(!isEmailValid(adrMail)){
@@ -169,24 +169,24 @@ class FormActivity : AppCompatActivity() {
                 this.printMessage = true
             }
 
-            val message : String = "Nom et prénom: " + this.nom + " " + this.prenom +"\n"+
-                                    "Genre: "+this.genreSelected+"\n"+
-                                    "Date de naissance: " + this.birth + "\n" +
-                                    "Numéro de téléphone: "+ this.numereTelephone +"\n"+
-                                    "Adresse Electronique: "+ this.adrMail + "\n"+
-                                    "Ajouter aux favoris: "+ if(this.etatCB)  "Oui" else "Non" + "\n"
+            val message : String = R.string.msgNom.toString() + this.nom + " " + this.prenom +"\n"+
+                                    R.string.msgGenre.toString() +this.genreSelected+"\n"+
+                                    R.string.msgBirth.toString() + this.birth + "\n" +
+                                    R.string.msgNum.toString() + this.numereTelephone +"\n"+
+                                    R.string.msgMail+ this.adrMail + "\n"+
+                                    R.string.msgFav+ if(this.etatCB)  R.string.ouiBouton.toString() else R.string.nonBouton.toString() + "\n"
 
             // save or cancel ?
             val popupDialog = PopupDialog(this)
             popupDialog.setTitrePopupDialog(getString(R.string.titrepopup))
             popupDialog.setMessagePopupDialog(message)
-            popupDialog.setTextLeftButtonPopup("Annuler")
-            popupDialog.setTextRightButtonPopup("Valider")
+            popupDialog.setTextLeftButtonPopup(getString(R.string.annuler))
+            popupDialog.setTextRightButtonPopup(getString(R.string.valider))
 
             // Cancel button
             popupDialog.getLeftButtonPopup().setOnClickListener{
                 popupDialog.dismiss()
-                Toast.makeText(this, " Annulé", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.annulee, Toast.LENGTH_SHORT).show()
             }
 
             // Validation
@@ -205,11 +205,11 @@ class FormActivity : AppCompatActivity() {
                 intentMainAct.putExtra("index",this.indexContact)
                 if(this.actionAFaire == "update" && this.linkImage == Uri.EMPTY){
                     intentMainAct.data  = Uri.parse(this.linkImgForUpdate)
-                    Log.e("linkImage",this.linkImgForUpdate)
+                    //Log.e("linkImage",this.linkImgForUpdate)
                 }
                 else if(linkImage != Uri.EMPTY){
                     intentMainAct.data  = linkImage
-                    Log.e("linkImage",linkImage.toString())
+                    //Log.e("linkImage",linkImage.toString())
                 }
 
                 setResult(RESULT_OK, intentMainAct)
@@ -225,14 +225,14 @@ class FormActivity : AppCompatActivity() {
             val popupDialog = PopupDialog(this)
             popupDialog.setTitrePopupDialog(getString(R.string.titrepopup))
             popupDialog.setMessagePopupDialog(getString(R.string.msgImgDeCouv))
-            popupDialog.setTextLeftButtonPopup("App. photo")
-            popupDialog.setTextRightButtonPopup("Galerie")
+            popupDialog.setTextLeftButtonPopup(getString(R.string.appPhoto))
+            popupDialog.setTextRightButtonPopup(getString(R.string.galerie))
 
             //App photo
             popupDialog.getLeftButtonPopup().setOnClickListener{
                 val popupDialogPermAppPhoto = PopupDialog(this)
                 popupDialogPermAppPhoto.setTitrePopupDialog(getString(R.string.titreAutorisation))
-                popupDialogPermAppPhoto.setMessagePopupDialog("Autoriser MyFisrtApp à accéser à votre caméra")
+                popupDialogPermAppPhoto.setMessagePopupDialog(getString(R.string.msgAutorisationAppPhoto))
                 popupDialogPermAppPhoto.setTextLeftButtonPopup(getString(R.string.nonBouton))
                 popupDialogPermAppPhoto.setTextRightButtonPopup(getString(R.string.ouiBouton))
 
@@ -266,7 +266,7 @@ class FormActivity : AppCompatActivity() {
             popupDialog.getRightButtonPopup().setOnClickListener{
                 val popupDialogPermGallery = PopupDialog(this)
                 popupDialogPermGallery.setTitrePopupDialog(getString(R.string.titreAutorisation))
-                popupDialogPermGallery.setMessagePopupDialog("Autoriser MyFisrtApp à accéser à votre galerie")
+                popupDialogPermGallery.setMessagePopupDialog(getString(R.string.msgAutorisationAppPhoto))
                 popupDialogPermGallery.setTextLeftButtonPopup(getString(R.string.nonBouton))
                 popupDialogPermGallery.setTextRightButtonPopup(getString(R.string.ouiBouton))
 
