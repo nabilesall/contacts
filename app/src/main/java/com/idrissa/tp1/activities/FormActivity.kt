@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -22,6 +24,7 @@ import com.idrissa.tp1.custom.PopupDialog
 import kotlinx.android.synthetic.main.activity_form.*
 import kotlinx.android.synthetic.main.details_contact.*
 import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,6 +50,7 @@ class FormActivity : AppCompatActivity() {
     private var cameracode = 897498
 
     private var linkImage : Uri = Uri.EMPTY
+    private var imgUriGallery : Uri = Uri.EMPTY
 
     private lateinit var actionAFaire : String
     private var indexContact : String = ""
@@ -280,11 +284,7 @@ class FormActivity : AppCompatActivity() {
                 }
 
                 popupDialogPermGallery.getRightButtonPopup().setOnClickListener{
-                    // PICK INTENT picks item from data
-                    // and returned selected item
                     val galleryIntent = Intent(Intent.ACTION_PICK)
-                    /*galleryIntent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
-                    galleryIntent.addFlags((Intent.FLAG_GRANT_READ_URI_PERMISSION))*/
 
                     file = getFile(nomfichier)
                     val fileProvider = FileProvider.getUriForFile(this,"com.idrissa.tp1", file)
@@ -294,7 +294,6 @@ class FormActivity : AppCompatActivity() {
                         galleryIntent.type = "image/*"
                         startActivityForResult(galleryIntent, gallerycode)
                     }
-                    //val galleryIntent = Intent(MediaStore.ACTION_PICK_IMAGES)
                     popupDialogPermGallery.dismiss()
                     popupDialog.dismiss()
                 }
@@ -303,12 +302,12 @@ class FormActivity : AppCompatActivity() {
             popupDialog.build()
         }
 
-        //partie bonus 2 pour changer la
         femme_btn.setOnClickListener {
             if(!this.imageUploaded){
                 imgDeCouverture.setImageResource(R.drawable.femme)
             }
         }
+
         homme_btn.setOnClickListener{
             if(!this.imageUploaded){
                 imgDeCouverture.setImageResource(R.drawable.homme)
@@ -354,45 +353,51 @@ class FormActivity : AppCompatActivity() {
         if(resultCode == Activity.RESULT_OK){
             when(requestCode){
                 gallerycode ->{
-                    //val stm = StorageManager()
-                    val fileUriGall2 = data!!.data
-                    val fileUriGall = Uri.fromFile(file)
-                    if (fileUriGall != null) this.linkImage = fileUriGall
-
-                    /*val takeFlags = (intent.flags
-                            and (Intent.FLAG_GRANT_READ_URI_PERMISSION
-                            or Intent.FLAG_GRANT_WRITE_URI_PERMISSION))
-                    contentResolver.takePersistableUriPermission(fileUriGall!!, takeFlags)*/
-
-                    imgDeCouverture.setImageURI(fileUriGall2)
-
+                    this.imgUriGallery = uploadImageFromGallery(data!!.data!!)
+                    this.linkImage = imgUriGallery
+                    imgDeCouverture.setImageURI(imgUriGallery)
                     this.imageUploaded = true
                 }
 
                 cameracode ->{
                     val fileUriCamera = Uri.fromFile(file)
                     if (fileUriCamera != null) this.linkImage = fileUriCamera
-                    /*
-                    //val imageChoisie = data?.extras?.get("data") as Bitmap
-                    //imgDeCouverture.setImageBitmap(imageChoisie)
-                    val imageChoisie = BitmapFactory.decodeFile(file.absolutePath)
-                    //imgDeCouverture.setImageBitmap(imageChoisie)
-                    val bytes = ByteArrayOutputStream()
-                    imageChoisie.compress(Bitmap.CompressFormat.JPEG,100,bytes)
-                    val path = MediaStore.Images.Media.insertImage(contentResolver,imageChoisie,"val",null)
-                    val uri : Uri = Uri.parse(path)
-                    imgDeCouverture.setImageURI(uri)
-                    StorageManager().TelechargerImage(this, uri)*/
-
                     imgDeCouverture.setImageURI(fileUriCamera)
-                    //StorageManager().telechargerImage(fileUri)
                     this.imageUploaded = true
-                    //this.linkImage = StorageManager().getUrl()
                 }
             }
         }else{
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    /**
+     * upload image from gallery
+     */
+    @SuppressLint("Recycle")
+    private fun uploadImageFromGallery(uri: Uri): Uri {
+        val dataPath = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, dataPath, null, null, null)
+        cursor!!.moveToFirst()
+        val index = cursor.getColumnIndex(dataPath[0])
+        val picturePath = cursor.getString(index)
+        cursor.close()
+        val bitmap = BitmapFactory.decodeFile(picturePath)
+        val file = creteFile()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(file))
+
+        return FileProvider.getUriForFile(this,"com.idrissa.tp1", file)
+    }
+
+    /**
+     * create a file
+     */
+    @SuppressLint("SimpleDateFormat")
+    private fun creteFile(): File {
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName = "JPEG_" + timeStamp + "_"
+        val storageDir = getExternalFilesDir(DIRECTORY_PICTURES)
+        return File.createTempFile(imageFileName, ".jpg", storageDir)
     }
 
     /***
@@ -401,5 +406,4 @@ class FormActivity : AppCompatActivity() {
     private fun isEmailValid(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
-
 }

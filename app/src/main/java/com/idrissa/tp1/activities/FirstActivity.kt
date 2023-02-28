@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
@@ -19,7 +18,6 @@ import kotlinx.android.synthetic.main.adapter_contact.*
 import kotlinx.android.synthetic.main.first_activity.*
 import java.io.*
 import java.lang.reflect.Type
-
 
 @Suppress("DEPRECATION")
 class FirstActivity : AppCompatActivity() {
@@ -78,7 +76,6 @@ class FirstActivity : AppCompatActivity() {
             int.putExtra("firstName","Idrissa")
             startActivityForResult(int,0)
         }
-
     }
 
     /**

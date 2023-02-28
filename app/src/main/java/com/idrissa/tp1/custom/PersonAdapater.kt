@@ -20,7 +20,6 @@ import com.idrissa.tp1.Person
 import com.idrissa.tp1.R
 import com.idrissa.tp1.activities.*
 
-
 class PersonAdapater(private val activity: FirstActivity,
                      private val context : Context,
                      private var listeContact : List<Person>,
@@ -40,7 +39,9 @@ class PersonAdapater(private val activity: FirstActivity,
         return 0
     }
 
-    @SuppressLint("SetTextI18n", "ViewHolder", "InflateParams", "ClickableViewAccessibility")
+    @SuppressLint("SetTextI18n", "ViewHolder", "InflateParams", "ClickableViewAccessibility",
+        "DiscouragedApi"
+    )
     override fun getView(position: Int, p1: View?, p2: ViewGroup?): View {
         val view = this.inflater.inflate(R.layout.adapter_contact,null)
 
@@ -134,13 +135,11 @@ class PersonAdapater(private val activity: FirstActivity,
         return try {
             val dataPath = arrayOf(MediaStore.Images.Media.DATA)
             mediaCursor = context.contentResolver.query(linkimage, dataPath, null, null, null)
-            val column_index: Int = mediaCursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            val columnIndex: Int = mediaCursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
             mediaCursor.moveToFirst()
-            mediaCursor.getString(column_index)
+            mediaCursor.getString(columnIndex)
         } finally {
-            if (mediaCursor != null) {
-                mediaCursor.close()
-            }
+            mediaCursor?.close()
         }
     }
 
