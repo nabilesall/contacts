@@ -31,7 +31,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/baseline_email_24" />
+                app:srcCompat="@drawable/baseline_email_24"
+                android:contentDescription="@string/todo" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -79,7 +80,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/baseline_calendar_month_24" />
+                app:srcCompat="@drawable/baseline_calendar_month_24"
+                android:contentDescription="@string/todo" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="15dp"
-                android:text="08 avr. 2022"
+                android:text="@string/_08_avr_2022"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -132,13 +134,13 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mobile : " />
+                    android:text="@string/mobile" />
 
                 <TextView
                     android:id="@+id/dc_telephone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0707070707" />
+                    android:text="@string/_tel" />
             </LinearLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -148,7 +150,7 @@
                 android:layout_marginEnd="100dp"
                 android:layout_marginBottom="5dp"
                 android:clickable="true"
-                android:contentDescription=""
+                android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +164,7 @@
                 android:layout_marginStart="100dp"
                 android:layout_marginBottom="5dp"
                 android:clickable="true"
-                android:contentDescription=""
+                android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="60dp"
-                android:text="prénom nom"
+                android:text="@string/nom_et_pr_nom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -198,7 +200,8 @@
             android:id="@+id/dc_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/todo" />
 
     </androidx.cardview.widget.CardView>
 

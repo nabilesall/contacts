@@ -22,7 +22,6 @@
             android:src="@drawable/homme" />
     </androidx.cardview.widget.CardView>
 
-
     <RelativeLayout
         android:layout_width="256dp"
         android:layout_height="wrap_content"
@@ -57,7 +56,6 @@
                 android:textSize="@dimen/text_size_btn"
                 tools:ignore="SmallSp" />
 
-
             <Button
                 android:id="@+id/message_contact"
                 style="?android:attr/borderlessButtonStyle"
@@ -77,9 +75,7 @@
                 android:text="@string/modifier"
                 android:textColor="@color/teal_200"
                 android:textSize="@dimen/text_size_btn" />
-
         </LinearLayout>
-
     </RelativeLayout>
 
 </LinearLayout>

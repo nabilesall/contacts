@@ -86,7 +86,13 @@ class FormActivity : AppCompatActivity() {
                 "homme" -> {
                     groupeGenre.check(homme_btn.id)
                 }
+                "male" -> {
+                    groupeGenre.check(homme_btn.id)
+                }
                 "femme" -> {
+                    groupeGenre.check(femme_btn.id)
+                }
+                "female" -> {
                     groupeGenre.check(femme_btn.id)
                 }
                 else -> {
@@ -169,12 +175,12 @@ class FormActivity : AppCompatActivity() {
                 this.printMessage = true
             }
 
-            val message : String = R.string.msgNom.toString() + this.nom + " " + this.prenom +"\n"+
-                                    R.string.msgGenre.toString() +this.genreSelected+"\n"+
-                                    R.string.msgBirth.toString() + this.birth + "\n" +
-                                    R.string.msgNum.toString() + this.numereTelephone +"\n"+
-                                    R.string.msgMail+ this.adrMail + "\n"+
-                                    R.string.msgFav+ if(this.etatCB)  R.string.ouiBouton.toString() else R.string.nonBouton.toString() + "\n"
+            val message : String = getString(R.string.msgNom) + this.nom + " " + this.prenom +"\n"+
+                                    getString(R.string.msgGenre) +this.genreSelected+"\n"+
+                                    getString(R.string.msgBirth) + this.birth + "\n" +
+                                    getString(R.string.msgNum) + this.numereTelephone +"\n"+
+                                    getString(R.string.msgMail) + this.adrMail + "\n"+
+                                    getString(R.string.msgFav) + if(this.etatCB)  getString(R.string.ouiBouton) else getString(R.string.nonBouton) + "\n"
 
             // save or cancel ?
             val popupDialog = PopupDialog(this)
@@ -205,11 +211,9 @@ class FormActivity : AppCompatActivity() {
                 intentMainAct.putExtra("index",this.indexContact)
                 if(this.actionAFaire == "update" && this.linkImage == Uri.EMPTY){
                     intentMainAct.data  = Uri.parse(this.linkImgForUpdate)
-                    //Log.e("linkImage",this.linkImgForUpdate)
                 }
                 else if(linkImage != Uri.EMPTY){
                     intentMainAct.data  = linkImage
-                    //Log.e("linkImage",linkImage.toString())
                 }
 
                 setResult(RESULT_OK, intentMainAct)

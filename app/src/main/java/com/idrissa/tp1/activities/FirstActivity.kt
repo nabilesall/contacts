@@ -124,12 +124,12 @@ class FirstActivity : AppCompatActivity() {
             val mail = data?.getStringExtra("mail").toString()
             val fav = data?.getBooleanExtra("favoris",true)
             val imageuri : Uri? = data?.data
-            Log.e("image lien", "$imageuri")
 
             //We check if the origin action is for add a new person
             if(action == "add"){
                 val person = Person(nom, prenom,genre, datenaiss, telephone, mail, fav!!,"$imageuri")
                 addListeDeContact(person)
+                Toast.makeText(this, R.string.add, Toast.LENGTH_SHORT).show()
             }
 
             //for update
@@ -145,9 +145,9 @@ class FirstActivity : AppCompatActivity() {
                 currPerson.mail = mail
                 currPerson.favoris = fav.toString().toBoolean()
                 currPerson.linkImage = imageuri.toString()
+                Toast.makeText(this, R.string.update, Toast.LENGTH_SHORT).show()
             }
             filterListe()
-            Toast.makeText(this, "Enregistré", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -59,8 +59,8 @@ class PersonAdapater(private val activity: FirstActivity,
 
         if(linkimage.toString() != "null"){
             try {
-                Log.e("linkimage","$linkimage")
-                view.findViewById<ImageView>(R.id.photo_contact).setImageURI(Uri.parse(linkimage.toString()))
+                view.findViewById<ImageView>(R.id.photo_contact)
+                    .setImageURI(Uri.parse(linkimage.toString()))
             }catch (ex : Exception){
                 Log.e("erreur","$ex")
             }
@@ -104,16 +104,15 @@ class PersonAdapater(private val activity: FirstActivity,
             startActivityForResult(activity ,dataContactIntent,0,null)
         }
 
-        // contact information
+        // contact informations
         view.setOnClickListener{
             dataContactIntent.setClass(context, ShowContactActivity::class.java)
             startActivityForResult(activity ,dataContactIntent,0,null)
         }
 
-        // delete contatc
+        // delete contact
         view.setOnLongClickListener {
             onRemoved.invoke(personneCourrante)
-            Log.e("size ", listeContact.size.toString())
             activity.findViewById<TextView>(R.id.nombreDeContacts).text = this.listeContact.size.toString() + " contacts"
 
             notifyDataSetChanged()

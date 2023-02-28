@@ -55,5 +55,14 @@
     <string name="msgFav">"Ajouter aux favoris: "</string>
     <string name="contacts_trouves">contacts trouvés</string>
     <string name="zero_contacts_trouves">Aucun contact trouvé</string>
+    <string name="update">Modifications enregistrées</string>
+    <string name="add">Contact ajouté</string>
+
+
+    <string name="contacts" translatable="false">Contacts</string>
+    <string name="_20_contacts" translatable="false">20 contacts</string>
+    <string name="todo" translatable="false">TODO</string>
+    <string name="_08_avr_2022" translatable="false">08 avr. 2022</string>
+    <string name="mobile" translatable="false">Mobile :</string>
 
 </resources>

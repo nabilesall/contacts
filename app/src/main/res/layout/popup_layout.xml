@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:gravity="center"
-    >
+    android:gravity="center">
 
     <TextView
         android:id="@+id/titrePopUp"
@@ -24,14 +23,13 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/leftButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Non"
+            android:text="@string/nonBouton"
             android:layout_marginEnd="30dp"
             style="?android:attr/buttonBarButtonStyle" />
 
@@ -39,11 +37,8 @@
             android:id="@+id/rightButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Oui"
-            style="?android:attr/buttonBarButtonStyle"
-            />
+            android:text="@string/ouiBouton"
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
-
-
 
 </LinearLayout>
