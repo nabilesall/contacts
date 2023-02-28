@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:text="@string/_20_contacts"
             android:textSize="20sp" />
-
     </LinearLayout>
 
     <SearchView
@@ -75,7 +74,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints,RtlSymmetry"/>
+                tools:ignore="MissingConstraints,RtlSymmetry" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
