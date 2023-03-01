@@ -53,8 +53,10 @@ Supprimer un contact de la liste de contacts.
 -----------------------------
 Faire un menu pour deux actions : Paramètre et Modifier ( pour supprimer tous les conatcts)  
 Choisir le thème : dark mode ou light mode ( Pour le moment se fait automatiquement selon le thème du téléphone)    
-Choisir la langue : Français, Anglais ( Pour le moment se fait automatiquement selon la langue du téléphone). Extensions pour d'autres langues.  
+Choisir la langue : Français, Anglais ( Pour le moment se fait automatiquement selon la langue du téléphone). Extensions pour d'autres langues  
 Choisir comment afficher les noms des contacts selon ces deux styles affichage : Nom_Prénom ou Prénom_Nom  
-Choisir le tri : Trier par le nom ou par le prénom. Pour le moment on tri sur le prénom.  
-Séparer la liste de contacts par lettre alphabet
-Faire des photos des contacts par défaut par la première lettre du prénom
+Choisir le tri : Trier par le nom ou par le prénom. Pour le moment on tri sur le prénom  
+Séparer la liste de contacts par lettre alphabet  
+Faire des photos des contacts par défaut par la première lettre du prénom  
+Envoi des notifications pour l'anniversaire d'un contact  
+Ouvrir l'application WhatsApp pour les contacts qui l'ont
