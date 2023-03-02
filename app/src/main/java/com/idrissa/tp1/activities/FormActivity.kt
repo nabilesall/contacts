@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -17,6 +18,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.google.android.material.snackbar.Snackbar
 import com.idrissa.tp1.R
@@ -238,66 +240,26 @@ class FormActivity : AppCompatActivity() {
 
             //App photo
             popupDialog.getLeftButtonPopup().setOnClickListener{
-                val popupDialogPermAppPhoto = PopupDialog(this)
-                popupDialogPermAppPhoto.setTitrePopupDialog(getString(R.string.titreAutorisation))
-                popupDialogPermAppPhoto.setMessagePopupDialog(getString(R.string.msgAutorisationAppPhoto))
-                popupDialogPermAppPhoto.setTextLeftButtonPopup(getString(R.string.nonBouton))
-                popupDialogPermAppPhoto.setTextRightButtonPopup(getString(R.string.ouiBouton))
-
-                popupDialogPermAppPhoto.getLeftButtonPopup().setOnClickListener{
-                    popupDialogPermAppPhoto.dismiss()
+                val readCameraPermission = android.Manifest.permission.CAMERA
+                if(ContextCompat.checkSelfPermission(this,readCameraPermission) == PackageManager.PERMISSION_GRANTED){
+                    openCamera()
                 }
-
-                popupDialogPermAppPhoto.getRightButtonPopup().setOnClickListener{
-                    val prendrePhoto = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    //add
-                    file = getFile(nomfichier)
-                    val fileProvider = FileProvider.getUriForFile(this,"com.idrissa.tp1",file)
-                    prendrePhoto.putExtra(MediaStore.EXTRA_OUTPUT,fileProvider)
-                    //fin add
-
-                    if(prendrePhoto.resolveActivity(this.packageManager) != null){
-                        startActivityForResult(prendrePhoto, cameracode)
-
-                        popupDialogPermAppPhoto.dismiss()
-                        popupDialog.dismiss()
-                    }else{
-                        Toast.makeText(this, R.string.msgErrorPhoto, Toast.LENGTH_SHORT).show()
-                        popupDialogPermAppPhoto.dismiss()
-                        popupDialog.dismiss()
-                    }
+                else{
+                    requestPermissions(arrayOf(readCameraPermission), 2)
                 }
-                popupDialogPermAppPhoto.build()
+                popupDialog.dismiss()
             }
 
             //Gallery
             popupDialog.getRightButtonPopup().setOnClickListener{
-                val popupDialogPermGallery = PopupDialog(this)
-                popupDialogPermGallery.setTitrePopupDialog(getString(R.string.titreAutorisation))
-                popupDialogPermGallery.setMessagePopupDialog(getString(R.string.msgAutorisationAppPhoto))
-                popupDialogPermGallery.setTextLeftButtonPopup(getString(R.string.nonBouton))
-                popupDialogPermGallery.setTextRightButtonPopup(getString(R.string.ouiBouton))
-
-                popupDialogPermGallery.getLeftButtonPopup().setOnClickListener{
-                    popupDialogPermGallery.dismiss()
-                    //popupDialog.dismiss()
+                val readImagePermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) android.Manifest.permission.READ_MEDIA_IMAGES else android.Manifest.permission.READ_EXTERNAL_STORAGE
+                if(ContextCompat.checkSelfPermission(this, readImagePermission) == PackageManager.PERMISSION_GRANTED){
+                    //permission granted
+                    openGallery()
+                }else{
+                    requestPermissions(arrayOf(readImagePermission), 1)
                 }
-
-                popupDialogPermGallery.getRightButtonPopup().setOnClickListener{
-                    val galleryIntent = Intent(Intent.ACTION_PICK)
-
-                    file = getFile(nomfichier)
-                    val fileProvider = FileProvider.getUriForFile(this,"com.idrissa.tp1", file)
-                    galleryIntent.putExtra(MediaStore.EXTRA_OUTPUT,fileProvider)
-
-                    if(galleryIntent.resolveActivity(this.packageManager) != null) {
-                        galleryIntent.type = "image/*"
-                        startActivityForResult(galleryIntent, gallerycode)
-                    }
-                    popupDialogPermGallery.dismiss()
-                    popupDialog.dismiss()
-                }
-                popupDialogPermGallery.build()
+                popupDialog.dismiss()
             }
             popupDialog.build()
         }
@@ -371,6 +333,26 @@ class FormActivity : AppCompatActivity() {
         }
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == 1) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openGallery()
+            } else {
+                Toast.makeText(this, getString(R.string.errorPerm), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        if (requestCode == 2) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera()
+            } else {
+                Toast.makeText(this, getString(R.string.errorPerm), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     /**
      * upload image from gallery
      */
@@ -387,6 +369,23 @@ class FormActivity : AppCompatActivity() {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(file))
 
         return FileProvider.getUriForFile(this,"com.idrissa.tp1", file)
+    }
+
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK)
+        file = getFile(nomfichier)
+        val fileProvider = FileProvider.getUriForFile(this,"com.idrissa.tp1", file)
+        galleryIntent.putExtra(MediaStore.EXTRA_OUTPUT,fileProvider)
+        galleryIntent.type = "image/*"
+        startActivityForResult(galleryIntent, gallerycode)
+    }
+
+    private fun openCamera() {
+        val prendrePhoto = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        file = getFile(nomfichier)
+        val fileProvider = FileProvider.getUriForFile(this,"com.idrissa.tp1",file)
+        prendrePhoto.putExtra(MediaStore.EXTRA_OUTPUT,fileProvider)
+        startActivityForResult(prendrePhoto, cameracode)
     }
 
     /**

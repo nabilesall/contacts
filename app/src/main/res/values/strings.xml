@@ -64,5 +64,6 @@
     <string name="todo" translatable="false">TODO</string>
     <string name="_08_avr_2022" translatable="false">08 avr. 2022</string>
     <string name="mobile" translatable="false">Mobile :</string>
+    <string name="errorPerm">Permission non accordée</string>
 
 </resources>

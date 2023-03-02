@@ -61,5 +61,6 @@
     <string name="zero_contacts_trouves">No contact found</string>
     <string name="update">Saved changes</string>
     <string name="add">registered contact</string>
+    <string name="errorPerm">Permission not granted</string>
 
 </resources>
