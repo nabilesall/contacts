@@ -1,7 +1,11 @@
 # contacts
 Ce projet a pour but de reprendre l'application de contact.  
 Elle permet entre autres d'enregistrer de nouveaux contacts ou de le modifier.  
-On peut ainsi recueillir des informations comme le nom et prénom, le sexe, la date de naissance, l'e-mail et le numéro de téléphone.
+On peut ainsi recueillir des informations comme le nom et prénom, le sexe, la date de naissance, l'e-mail et le numéro de téléphone.  
+
+<div align="center">
+<img src="https://github.com/nabilesall/contacts/blob/master/images/Home_contacts.jpg" width="200"/>  
+</div>
 
 ## Fonctionnalités
 Pour le moment l'application ne dispose pas beaucoup de fonctionnalités mais voici les principales. 
@@ -31,11 +35,19 @@ Effectuer des recherches sur la liste de contacts par le prénom, le nom ou enco
 
 ### Favoris
 -----------------------------
-Mettre en favoris des contacts et pouvoir ensuite afficher les contacts favoris seulement. 
+Mettre en favoris des contacts et pouvoir ensuite afficher les contacts favoris seulement.  
+
+<div align="center">
+<img src="https://github.com/nabilesall/contacts/blob/master/images/Favoris_contacts.jpg" width="200"/>  
+</div>
 
 ### Visualisation des contacts
 -----------------------------
 Afficher les contacts dans une autre activité, pour voir les détails du contact.
+
+<div align="center">
+<img src="https://github.com/nabilesall/contacts/blob/master/images/Info_plus_contacts.jpg" width="200"/>  
+</div>
 
 ### Envoi de mail
 -----------------------------
